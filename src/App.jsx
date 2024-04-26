@@ -8,13 +8,14 @@ import Login from './auth/Login';
 import Register from './auth/Register';
 import CrearCita from './user/CrearCita';
 import UserAuthProvider from './context/UserAuthContext';
-
+import AdministrarCita from './admin/AdministrarCitas';
+import Permission from './permission/Permission';
 
 function App() {
- 
+
   return (
-  <UserAuthProvider>    
-    <Router>
+  <Router>
+    <UserAuthProvider>    
       <Routes>
         {/* Definir la ruta para la página de inicio */}
         <Route path="/" element={<Home/>} />
@@ -25,10 +26,13 @@ function App() {
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register />} />
         <Route path="/crear-cita" element={<CrearCita />} />
+        <Route path="/administrar-cita" element={<AdministrarCita />} />
+        <Route path='/permission' element={<Permission/>}/>
       </Routes>
-    </Router>
-  </UserAuthProvider>
+    </UserAuthProvider>
+  </Router>
     );
+
 }
 
 export default App;

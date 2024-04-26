@@ -40,6 +40,7 @@ A continuación anexo los pasos a seguir para poder contribuir a este repositori
 - Diseñar interfaz basicas para ir realizando el desarrollo CHECK
 - Implementacion de el componente login con su respectivo formulario. CHECK
 - Conectar con supabase y autentificar usuarios con gmail CHECK
-- Utilizar mediante supabase los roles y policies
-- Crear el Crud Citas y Gestion de citas
+- Utilizar mediante supabase los roles y policies CHECK
+- Crear el Crud Citas
+- Crear el panel de administrador
 - Realizar las distintas vistas para usuarios sin logear

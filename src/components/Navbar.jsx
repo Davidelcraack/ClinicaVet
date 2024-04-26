@@ -16,7 +16,6 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logOut();
-    setButton(false);
   }
 
   return (
