@@ -5,46 +5,56 @@ export const UserAuthContext = createContext(null);
 
 function UserAuthProvider({children}){
 
-  const [token, setToken] = useState();
-
-  useEffect(() => {
-    const sessionToken = sessionStorage.getItem('token');
-    if(sessionToken){
-      setToken(sessionToken);
-    } else {
-    }
-  }, [])
+  const [user, setUser] = useState();
 
   const logIn = async(formData) => {
     const { data, error } =  await supabase.auth.signInWithPassword({
-    
       email: formData.email,
       password: formData.password,
-    });  if (error) {
+    }); 
+    if (error) {
       console.error('Error de inicio de sesión:', error.message);
-  }     else {
-      sessionStorage.setItem("token", data.session.access_token);
-      setToken(data.session.access_token);
-  }
+      return false
+    }
+    if(data){
+      const {user} = data
+      setUser(user)
+      return true
+    }
       
   }
   
   const singUp = async(formData)=> {
-    const { user, error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email: formData.email,
       password: formData.password,
     });
+
+    const { data: publicUserData, error: publicUserError} = await supabase.from('users').insert({
+      name: formData.name,
+      last_name: formData.last_name,
+      phone: formData.phone,
+      email: formData.email
+    }).eq('id', data.user.id).select()
+
   }
+
+  useEffect(() => {
+    supabase.auth.getUser().then(res => {
+      const {data: {user}} = res
+      setUser(user)
+    }).catch(e => console.error(e))
+    
+  }, [])
 
   const logOut = async() => {
     await supabase.auth.signOut();
-    setToken(null); 
-    sessionStorage.removeItem('token');
+    setUser(null)
   }
   
   return(
     
-    <UserAuthContext.Provider value={{token, logIn, logOut, singUp}}>
+    <UserAuthContext.Provider value={{user, logIn, logOut, singUp}}>
       {children}
     </UserAuthContext.Provider>
   );
