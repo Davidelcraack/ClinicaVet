@@ -37,4 +37,10 @@ A continuación anexo los pasos a seguir para poder contribuir a este repositori
 8. Espera la respuesta a tu pull request del dueño del repositorio al que estas contribuyendo
 
 ## To Do List
-- Implementacion de el componente login con su respectivo formulario.
+- Diseñar interfaz basicas para ir realizando el desarrollo CHECK
+- Implementacion de el componente login con su respectivo formulario. CHECK
+- Conectar con supabase y autentificar usuarios con gmail CHECK
+- Utilizar mediante supabase los roles y policies CHECK
+- Crear el Crud Citas
+- Crear el panel de administrador
+- Realizar las distintas vistas para usuarios sin logear

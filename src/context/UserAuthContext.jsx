@@ -1,13 +1,12 @@
 import { createContext, useState, useEffect } from 'react';
 import {supabase} from '../helpers/supabase';
-import { error } from 'jquery';
+
 
 export const UserAuthContext = createContext(null);
 
 function UserAuthProvider({children}){
 
-  const [user, setUser] = useState(null);
-  const [token, setToken] = useState();
+  const [user, setUser] = useState();
 
   useEffect(() => {
     checkUser().catch(error=>console.error(error));
@@ -27,37 +26,26 @@ function UserAuthProvider({children}){
         if (error) throw error;
 
         setUser({ ...session.data.session.user, role: userProfile.roles.name });
-        setToken(session.data.session.access_token)
       }
     
   }
 
 
-
-  useEffect(() => {
-    const sessionToken = sessionStorage.getItem('token');
-    if(sessionToken){
-      setToken(sessionToken);
-    } else {
-    }
-  }, [])
-
   const logIn = async(formData) => {
     const { data, error } =  await supabase.auth.signInWithPassword({
       email: formData.email,
       password: formData.password,
-    });  if (error) {
+    }); 
+    if (error) {
       console.error('Error de inicio de sesión:', error.message);
-  }     else {
-    const { data: userProfile, error } = await supabase
-    .from('users')
-    .select('roles(name)')
-    .eq('id', data.session.user.id)
-    .single()
-      sessionStorage.setItem("token", data.session.access_token);
-      setToken(data.session.access_token);
-      setUser({ ...data.session.user, role: userProfile.roles.name });
-  }
+
+      return false
+    }
+    if(data){
+      const {user} = data
+      setUser(user)
+      return true
+    }
       
   }
   
@@ -74,18 +62,35 @@ function UserAuthProvider({children}){
         }
       } 
     });
-  } 
+
+
+    const { data: publicUserData, error: publicUserError} = await supabase.from('users').insert({
+      name: formData.name,
+      last_name: formData.last_name,
+      phone: formData.phone,
+      email: formData.email
+    }).eq('id', data.user.id).select()
+
+  }
+
+
+  useEffect(() => {
+    supabase.auth.getUser().then(res => {
+      const {data: {user}} = res
+      setUser(user)
+    }).catch(e => console.error(e))
+    
+  }, [])
 
   const logOut = async() => {
     await supabase.auth.signOut();
-    setToken(null); 
-    setUser(null);
-    sessionStorage.removeItem('token');
+    setUser(null)
   }
   
   return(
     
-    <UserAuthContext.Provider value={{token, user, logIn, logOut, singUp}}>
+
+    <UserAuthContext.Provider value={{user, logIn, logOut, singUp}}>
       {children}
     </UserAuthContext.Provider>
   );
