@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import NavbarAdmin from './NavbarAdmin';
 
 
-const AdministrarCita = () => {
+const AdministrarDetallesCita = () => {
   
   const {token, user} = useContext(UserAuthContext);
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const goToHome = () => {
     navigate("/");
@@ -31,4 +31,4 @@ const AdministrarCita = () => {
   );
 };
 
-export default AdministrarCita;
+export default AdministrarDetallesCita;

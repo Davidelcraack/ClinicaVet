@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const navigate = useNavigate();
-  const {singUp} = useContext(UserAuthContext);
+  const {signUp} = useContext(UserAuthContext);
   const [formData, setFormData] = useState({
     name: '',
     last_name: '',
@@ -24,7 +24,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    singUp(formData);
+    signUp(formData);
     navigate("/login")
   };
 
@@ -63,9 +63,8 @@ const Register = () => {
           <label className='ml-2 font-medium text-base'>Recordar la contraseña</label>
         </div>
 
-        <button type="submit" className='py-2 border-2 border-gray-100 rounded-xl bg-[#0d6efd] text-white text-md active:scale-[.98] active:duration-75 hover:scale-[1.01] ease-in-out transition-all px-8'onClick={handleSubmit}>Crear cuenta</button>
+        <button type="submit" className='py-2 border-2 border-gray-100 rounded-xl bg-[#0d6efd] text-white text-md active:scale-[.98] active:duration-75 hover:scale-[1.01] ease-in-out transition-all px-8' onClick={handleSubmit}>Crear cuenta</button>
       </form>
-
       <div className="mt-6 flex justify-center items-center">
         <p className="font-medium text-base">¿Ya tienes una cuenta?</p>
         <Link to='/login' className="text-[#0d6efd] text-base font-medium ml-2">Iniciar sesión</Link>

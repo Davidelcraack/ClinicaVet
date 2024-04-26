@@ -10,6 +10,10 @@ import CrearCita from './user/CrearCita';
 import UserAuthProvider from './context/UserAuthContext';
 import AdministrarCita from './admin/AdministrarCitas';
 import Permission from './permission/Permission';
+import CrearMascota from './user/CrearMascota';
+import Administrador from './admin/Administrador';
+import AdministrarDetallesCita from './admin/AdministrarDetallesCita';
+import AdministrarMascota from './admin/AdministrarMascota';
 
 function App() {
 
@@ -26,7 +30,11 @@ function App() {
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register />} />
         <Route path="/crear-cita" element={<CrearCita />} />
+        <Route path='/admin' element={<Administrador />}/>
         <Route path="/administrar-cita" element={<AdministrarCita />} />
+        <Route path="/detalles-cita" element={<AdministrarDetallesCita/>} />
+        <Route path='/crear-mascota' element={<CrearMascota />}/>
+        <Route path='/administrar-mascota' element={<AdministrarMascota/>}/>
         <Route path='/permission' element={<Permission/>}/>
       </Routes>
     </UserAuthProvider>
