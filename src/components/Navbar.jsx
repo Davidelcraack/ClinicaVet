@@ -7,7 +7,7 @@ import { UserAuthContext } from '../context/UserAuthContext';
 
 
 const Navbar = () => {
-  const {token, logOut} = useContext(UserAuthContext);
+  const {user, logOut} = useContext(UserAuthContext);
   const [nav, setNav] = useState(false);
 
   const handleNav = () => {
@@ -32,7 +32,7 @@ const Navbar = () => {
           <li className="p-4"><Link to="/services">Servicios</Link></li>
           <li className="p-4"><Link to="/about">La clinica</Link></li>
           <li className="p-4"><Link to="/contact">Contacto</Link></li>
-          {!token ? <li className="flex items-center justify-center pt-4 pb-4 border-b-2 border-b-white"><Link to="/login">Iniciar sesión</Link></li> : <li className="flex items-center justify-center pt-4 pb-4 border-b-2 border-b-white no-underline"><button onClick={handleLogout}>Cerrar sesion</button></li>}
+          {!user ? <li className="flex items-center justify-center pt-4 pb-4 border-b-2 border-b-white"><Link to="/login">Iniciar sesión</Link></li> : <li className="flex items-center justify-center pt-4 pb-4 border-b-2 border-b-white no-underline"><button onClick={handleLogout}>Cerrar sesion</button></li>}
         </ul>
         
         {/* Boton de menu para pantallas pequeñas */}
@@ -51,7 +51,7 @@ const Navbar = () => {
         <li className="p-4 border-b-2 border-b-white"><Link to="/services">Servicios</Link></li>
         <li className="p-4 border-b-2 border-b-white"><Link to="/about">La clinica</Link></li>
         <li className="p-4 border-b-2 border-b-white"><Link to="/contact">Contacto</Link></li>
-        {!token ? <li className="flex items-center justify-center pt-4 pb-4 border-b-2 border-b-white"><Link to="/login">Iniciar sesión</Link></li> : <li className="flex items-center justify-center pt-4 pb-4 border-b-2 border-b-white no-underline"><button onClick={handleLogout}>Cerrar sesion</button></li>}
+        {!user ? <li className="flex items-center justify-center pt-4 pb-4 border-b-2 border-b-white"><Link to="/login">Iniciar sesión</Link></li> : <li className="flex items-center justify-center pt-4 pb-4 border-b-2 border-b-white no-underline"><button onClick={handleLogout}>Cerrar sesion</button></li>}
          
       </ul>
     </div>

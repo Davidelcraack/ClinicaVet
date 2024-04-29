@@ -6,10 +6,10 @@ import { UserAuthContext } from "../context/UserAuthContext";
 
 const Hero = () => {
 
-  const {user, token} = useContext(UserAuthContext);
-  
+  const {user} = useContext(UserAuthContext);
   const navigate = useNavigate();
 
+  console.log(user)
   const handleClick = () => {
     if (user && user.role == "admin") {
 
@@ -20,10 +20,9 @@ const Hero = () => {
       navigate("/crear-mascota");
     }
   
-    if (!token) {
+    if (!user) {
       navigate("/login");
     }
-    //console.log(user && user.role);
   }
 
   const handleAdmin = () => {

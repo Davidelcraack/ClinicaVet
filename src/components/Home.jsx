@@ -11,7 +11,6 @@ const Home = () => {
     navigate('/');
   }
 
-  //Encontrar la forma que mediante el token me de los datos
 
   return (
     <div>

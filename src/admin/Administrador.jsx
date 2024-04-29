@@ -9,7 +9,7 @@ const Administrador = () => {
   const navigate = useNavigate();
   
   useEffect(() => {
-    if (!user || !token || user.role !== 'admin') {
+    if (!user || user.role !== 'admin') {
       navigate("/permission");
     }
   }, [user, token, navigate]); 
@@ -22,13 +22,15 @@ const Administrador = () => {
   //Encontrar la forma que mediante el token me de los datos
 
   return (
-    <div>
+    <div className='bg-sky-300 w-screen h-screen'>
       <NavbarAdmin/>
       {/* Aquí puedes añadir el resto*/}
-      <div>
-         
-        <button onClick={handleLogout}>Logout</button>
+      <div className='py-8 bg-sky-400'>
+      <h2 className="font-semibold text-xl text-gray-800 leading-tight ">
+            Bienvenido a la vista de administrador
+        </h2>
       </div>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };

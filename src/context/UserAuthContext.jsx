@@ -14,65 +14,72 @@ function UserAuthProvider({children}){
 
   async function checkUser() {
 
-      const session = await supabase.auth.getSession();
-     
-      if (session.data.session) {
-        const { data: userProfile, error } = await supabase
-          .from('users')
-          .select('roles(name)')
-          .eq('id', session.data.session.user.id)
-          .single()
+    const session = await supabase.auth.getSession();
+   
+    if (session.data.session) {
+      const { data: userProfile, error } = await supabase
+        .from('users')
+        .select('roles(name)')
+        .eq('id', session.data.session.user.id)
+        .single()
 
-        if (error) throw error;
+      if (error) throw error;
 
-        setUser({ ...session.data.session.user, role: userProfile.roles.name });
-      }
-    
-  }
-
-
-  const logIn = async(formData) => {
-    const { data, error } =  await supabase.auth.signInWithPassword({
-      email: formData.email,
-      password: formData.password,
-    }); 
-    if (error) {
-      console.error('Error de inicio de sesión:', error.message);
-
-      return false
+      setUser({ ...session.data.session.user, role: userProfile.roles.name });
     }
-    if(data){
-      const {user} = data
-      setUser(user)
-      return true
-    }
-      
-  }
   
-  const singUp = async(formData)=> {
+}
+
+
+const logIn = async (formData) => {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: formData.email,
+    password: formData.password,
+  });
+
+  if (error) {
+    console.error('Error de inicio de sesión:', error.message);
+    return false;
+  }
+
+  if (data) {
+    // Suponiendo que la autenticación fue exitosa, obtenemos el rol.
+    const { data: userProfile, error: profileError } = await supabase
+      .from('users')
+      .select('roles(name)')
+      .eq('id', data.session.user.id)
+      .single();
+
+    if (profileError) {
+      console.error('Error al obtener el perfil de usuario:', profileError);
+      return false;
+    }
+
+    setUser({ ...data.session.user, role: userProfile.roles.name });
+    return true;
+  }
+};
+  
+  const signUp = async (formData) => {
     const { data, error } = await supabase.auth.signUp({
       email: formData.email,
       password: formData.password,
       options: {
-        data: {
-          name:formData.name,
-          last_name:formData.last_name,
-          phone: formData.phone
-          
-        }
-      } 
-    });
-
-
-    const { data: publicUserData, error: publicUserError} = await supabase.from('users').insert({
-      name: formData.name,
-      last_name: formData.last_name,
-      phone: formData.phone,
-      email: formData.email
-    }).eq('id', data.user.id).select()
-
-  }
-
+      data: {  
+        name: formData.name,
+        last_name: formData.last_name,
+        phone: formData.phone,
+      },
+    },
+  })
+  
+    if (error) {
+      console.error('Error durante el registro:', error);
+      return { error };
+    }
+  
+    return { user: data.user };  // Retorna el usuario si el registro es exitoso
+  };
 
   useEffect(() => {
     supabase.auth.getUser().then(res => {
@@ -90,7 +97,7 @@ function UserAuthProvider({children}){
   return(
     
 
-    <UserAuthContext.Provider value={{user, logIn, logOut, singUp}}>
+    <UserAuthContext.Provider value={{user, logIn, logOut, signUp}}>
       {children}
     </UserAuthContext.Provider>
   );

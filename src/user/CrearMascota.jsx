@@ -66,8 +66,17 @@ function CrearMascota() {
     navigate("/");
   }
 
+  const handleCita = () => {
+    navigate("/crear-cita");
+  }
+
   return (
-    <section className='bg-white'>
+  <div className='bg-sky-200'>
+   <div className='relative z-0 filter'>
+        <img src='/images/banner.jpg' className='w-full h-auto'></img>
+        <h2 className='text-2xl font-bold text-center text-[#004f6f]'>Por favor rellena el siguiente formulario para la creación de su mascota</h2>
+    </div>
+    <section className=''>
       <div className='py-8 px-4 mx-6 max-w-2x1 lg:py-16'>
         <h2 className='mb-4 text-xl font-bold text-gray-900'>Registre su mascota</h2>
         <form onSubmit={handleSubmit}>
@@ -114,12 +123,13 @@ function CrearMascota() {
             </div>
           </div>
           
-          <button onClick={handleSubmit} type="submit" className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-primary-200">Registrar Cita</button>
+          <button onClick={handleSubmit} type="submit" className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-primary-200">Registrar Mascota</button>
           <button onClick={handleVolver} className="ml-6 inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-primary-200">Volver</button>
+          <button onClick={handleCita} className="ml-6 inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-primary-200">Ya tengo una mascota registrada</button>
         </form>
       </div>
     </section>
-  
+  </div>
   );
 }
 

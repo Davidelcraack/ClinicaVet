@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const NavbarAdmin = () => {
-  const {token, logOut} = useContext(UserAuthContext);
+  const {logOut} = useContext(UserAuthContext);
   const navigate = useNavigate();
   const [nav, setNav] = useState(false);
 
@@ -27,14 +27,15 @@ const NavbarAdmin = () => {
         {/* Logo */}
         <div className="flex items-center">
           <img src="images\logo.png" alt="Logo" className="h-10 w-auto mr-2" />
-          <h1 className='text-3xl font-bold text-[#fff]'> Panel de administracion de la clínica</h1>
+          <h1 className='text-3xl font-bold text-[#fff]'> Administración de la clínica</h1>
         </div>
         {/* Menu principal que se va cuando la pantalla es pequeña */}
         <ul className="hidden md:flex">
           <li className="p-4"><Link to="/admin">Dashboard</Link></li>
           <li className="p-4"><Link to="/administrar-mascota">Administrar mascotas</Link></li>
           <li className="p-4"><Link to="/administrar-cita">Administrar citas</Link></li>
-          <li className="p-4"><Link to="/detalles-cita">Administrar detalles de las citas</Link></li>
+          <li className="p-4"><Link to="/detalles-cita">Administrar horarios</Link></li>
+          <li className="p-4"><Link to="/administrar-servicios">Administrar servicios</Link></li>
           <li className="flex items-center justify-center pt-4 pb-4 border-b-2 border-b-white no-underline"><button onClick={handleLogout}>Cerrar sesion</button></li>
         </ul>
         
@@ -53,7 +54,8 @@ const NavbarAdmin = () => {
         <li className="p-4 mt-3 border-b-2 border-b-white"><Link to="/admin">Dashboard</Link></li>
         <li className="p-4 border-b-2 border-b-white"><Link to="/administrar-mascota">Administrar mascotas</Link></li>
         <li className="p-4 border-b-2 border-b-white"><Link to="/administrar-cita">Administrar citas</Link></li>
-        <li className="p-4 border-b-2 border-b-white"><Link to="/detalles-cita">Administrar detalles de las citas</Link></li>
+        <li className="p-4 border-b-2 border-b-white"><Link to="/detalles-cita">Administrar horarios</Link></li>
+        <li className="p-4 border-b-2 border-b-white"><Link to="/administrar-servicios">Administrar servicios</Link></li>
        <li className="flex items-center justify-center pt-4 pb-4 border-b-2 border-b-white no-underline"><button onClick={handleLogout}>Cerrar sesion</button></li>  
       </ul>
     </div>
