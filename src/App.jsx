@@ -15,6 +15,7 @@ import Administrador from './admin/Administrador';
 import AdministrarDetallesCita from './admin/AdministrarDetallesCita';
 import AdministrarMascota from './admin/AdministrarMascota';
 import AdministrarServicios from './admin/AdministrarServicios';
+import CrearUsuario from './user/CrearUsuario';
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
         <Route path='/crear-mascota' element={<CrearMascota />}/>
         <Route path='/administrar-mascota' element={<AdministrarMascota/>}/>
         <Route path='/administrar-servicios' element={<AdministrarServicios/>}/>
+        <Route path='/crear-usuario' element={<CrearUsuario/>}/>
         <Route path='/permission' element={<Permission/>}/>
       </Routes>
     </UserAuthProvider>

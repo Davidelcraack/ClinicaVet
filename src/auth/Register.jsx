@@ -8,9 +8,6 @@ const Register = () => {
   const navigate = useNavigate();
   const {signUp, data, user} = useContext(UserAuthContext);
   const [formData, setFormData] = useState({
-    name: '',
-    last_name: '',
-    phone: '',
     email: '',
     password: ''
   });
@@ -37,21 +34,7 @@ const Register = () => {
       <h1 className='text-5xl font-semibold'>Crear una cuenta</h1>
       <p className='font-medium text-lg text-gray-400 mt-3'>¡Regístrate para acceder a todos nuestros servicios!</p>
       <form onSubmit={handleSubmit} className='mt-8'>
-        <div>
-          <label className='text-lg font-medium'>Nombre</label>
-          <input className='w-full border-2 border-gray-100 rounded-px p-4 mt-1 bg-transparent' placeholder="Ingrese su nombre" name='name' onChange={handleChange} />
-        </div>
-
-        <div>
-          <label className='text-lg font-medium'>Apellido</label>
-          <input className='w-full border-2 border-gray-100 rounded-px p-4 mt-1 bg-transparent' placeholder="Ingrese su apellido" name='last_name' onChange={handleChange} />
-        </div>
-
-        <div>
-          <label className='text-lg font-medium'>Teléfono</label>
-          <input className='w-full border-2 border-gray-100 rounded-px p-4 mt-1 bg-transparent' placeholder="Ingrese su teléfono" name='phone' onChange={handleChange} />
-        </div>
-
+        
         <div>
           <label className='text-lg font-medium'>Correo electrónico</label>
           <input className='w-full border-2 border-gray-100 rounded-px p-4 mt-1 bg-transparent' placeholder="Ingrese su correo electrónico" name='email' onChange={handleChange} />

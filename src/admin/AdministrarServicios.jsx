@@ -77,7 +77,7 @@ const AdministrarServicios = () => {
       </div>
 
     {/* Formulario para añadir servicios */}
-    <div className='py-12'>
+    <div className='py-12 bg-sky-200'>
      <div className='flex flex-col items-center justify-center pb-8'>
        <div className='flex flex-row items-center justify-center'>
          <h3 className='font-bold text-lg py-4'>Añadir nuevo Servicio</h3>

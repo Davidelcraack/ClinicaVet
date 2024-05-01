@@ -13,22 +13,31 @@ function UserAuthProvider({children}){
   }, []);
 
   async function checkUser() {
+  const session = await supabase.auth.getSession();
 
-    const session = await supabase.auth.getSession();
-   
-    if (session.data.session) {
-      const { data: userProfile, error } = await supabase
-        .from('users')
-        .select('roles(name)')
-        .eq('id', session.data.session.user.id)
-        .single()
+  if (session.data.session) {
+    const { data: userProfile, error } = await supabase
+      .from('users')
+      .select('role, name, pets!inner(*)') // Ajusta esta línea según las relaciones y campos en tu base de datos
+      .eq('id', session.data.session.user.id)
+      .single()
 
-      if (error) throw error;
-
-      setUser({ ...session.data.session.user, role: userProfile.roles.name });
+    if (error) {
+      console.error("Error fetching user details:", error);
+      throw error;
     }
-  
+
+    // Asegúrate de que el rol y el nombre están correctamente asignados
+    setUser({
+      ...session.data.session.user,
+      role: userProfile.role,
+      name: userProfile.name,
+      pets: userProfile.pets || [] // Asegúrate de manejar casos donde no haya mascotas
+    });
+  }
 }
+  
+
 
 
 const logIn = async (formData) => {
@@ -64,13 +73,6 @@ const logIn = async (formData) => {
     const { data, error } = await supabase.auth.signUp({
       email: formData.email,
       password: formData.password,
-      options: {
-      data: {  
-        name: formData.name,
-        last_name: formData.last_name,
-        phone: formData.phone,
-      },
-    },
   })
   
     if (error) {
@@ -78,7 +80,7 @@ const logIn = async (formData) => {
       return { error };
     }
   
-    return { user: data.user };  // Retorna el usuario si el registro es exitoso
+    return { user: data.user }; 
   };
 
   useEffect(() => {
