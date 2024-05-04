@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const NavbarAdmin = () => {
+const NavbarUser = () => {
   const {logOut} = useContext(UserAuthContext);
   const navigate = useNavigate();
   const [nav, setNav] = useState(false);
@@ -27,14 +27,13 @@ const NavbarAdmin = () => {
         {/* Logo */}
         <div className="flex items-center">
           <img src="images\logo.png" alt="Logo" className="h-10 w-auto mr-2" />
-          <h1 className='text-3xl font-bold text-[#fff]'> Administración de la clínica</h1>
+          <h1 className='text-3xl font-bold text-[#fff]'> Usuario de la clínica</h1>
         </div>
         {/* Menu principal que se va cuando la pantalla es pequeña */}
         <ul className="hidden md:flex">
-          <li className="p-4"><Link to="/administrar-cita">Administrar citas</Link></li>
-          <li className="p-4"><Link to="/administrar-mascota">Administrar mascotas</Link></li>
-          <li className="p-4"><Link to="/detalles-cita">Administrar horarios</Link></li>
-          <li className="p-4"><Link to="/administrar-servicios">Administrar servicios</Link></li>
+          <li className="p-4"><Link to="/dashboard">Dashboard</Link></li>
+          <li className="p-4"><Link to="/crear-cita">Crear cita</Link></li>
+          <li className="p-4"><Link to="/crear-mascota">Mis mascotas</Link></li>
           <li className="flex items-center justify-center pt-4 pb-4 border-b-2 border-b-white no-underline"><button onClick={handleLogout}>Cerrar sesion</button></li>
         </ul>
         
@@ -50,14 +49,13 @@ const NavbarAdmin = () => {
         <div className="flex items-center justify-center my-4">
           <img src="images\logo.png" alt="Logo" className="h-16 w-auto" />
         </div>
-        <li className="p-4 border-b-2 border-b-white"><Link to="/administrar-cita">Administrar citas</Link></li>
-        <li className="p-4 border-b-2 border-b-white"><Link to="/administrar-mascota">Administrar mascotas</Link></li>
-        <li className="p-4 border-b-2 border-b-white"><Link to="/detalles-cita">Administrar horarios</Link></li>
-        <li className="p-4 border-b-2 border-b-white"><Link to="/administrar-servicios">Administrar servicios</Link></li>
+        <li className="p-4 border-b-2 border-b-white"><Link to="/dashboard">Dashboard</Link></li>
+        <li className="p-4 border-b-2 border-b-white"><Link to="/crear-cita">Crear cita</Link></li>
+        <li className="p-4 border-b-2 border-b-white"><Link to="/crear-mascota">Añadir mascotas</Link></li>
        <li className="flex items-center justify-center pt-4 pb-4 border-b-2 border-b-white no-underline"><button onClick={handleLogout}>Cerrar sesion</button></li>  
       </ul>
     </div>
   )
 }
 
-export default NavbarAdmin;
+export default NavbarUser;

@@ -36,9 +36,9 @@ const Navbar = () => {
         </ul>
         
         {/* Boton de menu para pantallas pequeñas */}
-        <div onClick={handleNav} className='block md:hidden'>
+        <button onClick={handleNav} className='block md:hidden'>
           {!nav ? <IoMdMenu size={20} /> : <RxCross1 size={20} />}
-        </div>
+        </button>
       </div>
 
       {/* Menú desplegable para pantallas pequeñas */}

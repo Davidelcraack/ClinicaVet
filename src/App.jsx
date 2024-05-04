@@ -11,11 +11,12 @@ import UserAuthProvider from './context/UserAuthContext';
 import AdministrarCita from './admin/AdministrarCitas';
 import Permission from './permission/Permission';
 import CrearMascota from './user/CrearMascota';
-import Administrador from './admin/Administrador';
 import AdministrarDetallesCita from './admin/AdministrarDetallesCita';
 import AdministrarMascota from './admin/AdministrarMascota';
+import EditarMascota from './admin/EditarMascota';
 import AdministrarServicios from './admin/AdministrarServicios';
 import CrearUsuario from './user/CrearUsuario';
+import Dashboard from './user/Dashboard';
 
 function App() {
 
@@ -31,12 +32,13 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard/>}/>
         <Route path="/crear-cita" element={<CrearCita />} />
-        <Route path='/admin' element={<Administrador />}/>
         <Route path="/administrar-cita" element={<AdministrarCita />} />
         <Route path="/detalles-cita" element={<AdministrarDetallesCita/>} />
         <Route path='/crear-mascota' element={<CrearMascota />}/>
         <Route path='/administrar-mascota' element={<AdministrarMascota/>}/>
+        <Route path='/editar-mascota/:petId' element={<EditarMascota/>}/>
         <Route path='/administrar-servicios' element={<AdministrarServicios/>}/>
         <Route path='/crear-usuario' element={<CrearUsuario/>}/>
         <Route path='/permission' element={<Permission/>}/>

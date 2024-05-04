@@ -8,6 +8,7 @@ const AdministrarCita = () => {
   const { user } = useContext(UserAuthContext);
   const navigate = useNavigate();
   const [appoiments, setCitas] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().slice(0, 10)); // Formato YYYY-MM-DD
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -15,33 +16,47 @@ const AdministrarCita = () => {
     if (!user || user.role !== 'admin') {
       navigate("/permission");
     } else {
-      fetchCitas();
+      fetchCitas(selectedDate);
     }
-  }, [user, navigate]);
+  }, [user, navigate, selectedDate]);
 
-  const fetchCitas = async () => {
+  const fetchCitas = async (date) => {
     setLoading(true);
+    setError('');
     try {
+      const startDate = new Date(date);
+      const endDate = new Date(date);
+      endDate.setDate(startDate.getDate() + 1); // Añadir un día
+  
       let { data, error } = await supabase
         .from('appoiments')
         .select(`
           id,
-          pets: pets_id (name),   
+          pets: pets_id (
+            name,
+            species,
+            owner: users!owner_id (id, name, last_name, phone, email)
+          ),    
           services: services_id (description),
           slot: slot_id (date, start_time)
-        `);
+        `)
+        .gte('slot.date', startDate.toISOString().slice(0, 10))
+        .lt('slot.date', endDate.toISOString().slice(0, 10));
   
       if (error) throw error;
   
-      // Filtramos los resultados para asegurarnos de que sólo incluyamos citas con un slot asociado.
-      const citasConSlot = data.filter(appoiment => appoiment.slot);
-  
-      // Ordenamos los datos después de la consulta, asegurándonos de que exista el objeto slot.
-      citasConSlot.sort((a, b) => {
-        const dateA = a.slot ? new Date(`${a.slot.date}T${a.slot.start_time}`) : new Date();
-        const dateB = b.slot ? new Date(`${b.slot.date}T${b.slot.start_time}`) : new Date();
-        return dateA - dateB;
-      });
+      const citasConSlot = data.filter(appoiment => appoiment.slot && appoiment.slot.date && appoiment.slot.start_time)
+        .sort((a, b) => {
+          try {
+            const dateA = new Date(`${a.slot.date}T${a.slot.start_time}`);
+            const dateB = new Date(`${b.slot.date}T${b.slot.start_time}`);
+            return dateA - dateB;
+          } catch (e) {
+            console.error('Error al procesar las fechas:', e);
+            setError('Algunas fechas no se pudieron procesar correctamente.');
+            return 0;
+          }
+        });
   
       setCitas(citasConSlot);
     } catch (error) {
@@ -50,33 +65,34 @@ const AdministrarCita = () => {
       setLoading(false);
     }
   };
-  
-  const handleDeleteCita = async (appoimentId) => {
-    const { data, error } = await supabase
-      .from('appoiments')
-      .delete()
-      .match({ id: appoimentId });
 
-    if (error) {
-      setError(`Error al eliminar la appoiment: ${error.message}`);
-    } else {
-      // Actualizar la lista de appoiments
-      setCitas(appoiments.filter((appoiment) => appoiment.id !== appoimentId));
-    }
+  const handleDateChange = (e) => {
+    setSelectedDate(e.target.value);
   };
 
+  const handleClick = () => {
+    navigate("/")
+  }
+
   return (
-    <div  className='bg-sky-200 w-screen h-screen'>
+    <div className='bg-sky-200 w-screen h-screen'>
       <NavbarAdmin/>
       <div className='relative z-0 filter'>
         <img src='/images/banner.jpg' className='w-full h-auto '></img>
         <h2 className='text-3xl font-bold text-center text-[#004f6f]'>Gestión de Citas</h2>
-        {/* ... resto de tu componente ... */}
+        {/* Selector de fecha */}
+        <div className='text-center'>
+          <input
+            type='date'
+            value={selectedDate}
+            onChange={handleDateChange}
+            className='p-2 border-2 border-gray-300 rounded-md'
+          />
+        </div>
+        {/* Resto del componente... */}
+
       </div>
-
-      {/* Muestra un mensaje de carga o error si es necesario */}
-      {loading ? <p>Cargando citas...</p> : error ? <p>{error}</p> : null}
-
+ 
       {/* Tabla de citas */}
       
       <div className='max-w-7xl mx-auto sm:px-4 lg:px-6 overflow-hidden shadow-sm sm:rounded-lg bg-sky-300 pb-6'>
@@ -85,8 +101,12 @@ const AdministrarCita = () => {
         <table className='w-full text-sm text-center rtl:text-right text-gray-500'>
           <thead className='text-gray-800 uppercase bg-sky-400'>
             <tr>
+              <th scope='col' className='px-6'>Dueño</th>
+              <th scope='col' className='px-6'>Email</th>
+              <th scope='col' className='px-6'>Telefono</th>
               <th scope='col' className='px-6'>Mascota</th>
-              <th scope='col' className='px-6'>Servicio</th>
+              <th scope='col' className='px-6'>Especie</th>
+              <th scope='col' className='px-6'>Servicios</th>
               <th scope='col' className='px-6'>Fecha y hora</th>
               <th scope='col' className='px-6'>Acciones</th>
             </tr>
@@ -94,7 +114,11 @@ const AdministrarCita = () => {
           <tbody>
             {appoiments.map((appoiment) => (
               <tr className='odd:bg-sky-300 font-semibold even:bg-sky-200 border-b text-gray-600' key={appoiment.id}>
-                <td className='px-6 py-4'>{appoiment.pets.name}</td>  
+                <td>{appoiment.pets.owner.name} {appoiment.pets.owner.last_name}</td>
+                <td>{appoiment.pets.owner.email}</td>
+                <td>{appoiment.pets.owner.phone}</td>
+                <td className='px-6 py-4'>{appoiment.pets.name}</td> 
+                <td className='px-6 py-4'>{appoiment.pets.species}</td>   
                 <td className='px-6 py-4'>{appoiment.services.description}</td>  
                 <td>
                   {appoiment.slot
@@ -110,6 +134,8 @@ const AdministrarCita = () => {
             ))}
           </tbody>
         </table>
+        <button onClick={handleClick} className='py-2 rounded-xl bg-[#0d6efd] text-white my-6 mt-12 text-md w-[200px] font-medium active:scale-[.98] active:duration-75 hover:scale-[1.01] ease-in-out transition-all'>Volver al inicio</button>
+
       </div>
     </div>
   </div>

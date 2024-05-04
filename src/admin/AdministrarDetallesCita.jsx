@@ -90,7 +90,7 @@ const AdministrarDetallesCita = () => {
 
   // Resto del componente...
   return (
-    <div className='bg-sky-200 w-screen h-screen'>
+    <div className='bg-sky-200'>
       <NavbarAdmin />
       {/* Resto del componente */}
       <div className='relative z-0 filter'>

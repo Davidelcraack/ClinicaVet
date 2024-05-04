@@ -68,12 +68,12 @@ const AdministrarServicios = () => {
 
 
   return (
-    <div className='bg-sky-200 w-screen h-screen'>
+    <div className='bg-sky-200'>
       <NavbarAdmin />
       {/* Resto del componente */}
       <div className='relative z-0 filter'>
         <img src='/images/banner.jpg' className='w-full h-auto'></img>
-        <h2 className='text-3xl font-bold text-center text-[#004f6f]'>Bienvenido a la administración de horarios</h2>
+        <h2 className='text-3xl font-bold text-center text-[#004f6f]'>Bienvenido a la administración de servicios</h2>
       </div>
 
     {/* Formulario para añadir servicios */}

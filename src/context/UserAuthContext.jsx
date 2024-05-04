@@ -18,7 +18,7 @@ function UserAuthProvider({children}){
   if (session.data.session) {
     const { data: userProfile, error } = await supabase
       .from('users')
-      .select('role, name, pets!inner(*)') // Ajusta esta línea según las relaciones y campos en tu base de datos
+      .select('roles!inner(name), name, pets!inner(*)') 
       .eq('id', session.data.session.user.id)
       .single()
 
@@ -27,19 +27,15 @@ function UserAuthProvider({children}){
       throw error;
     }
 
-    // Asegúrate de que el rol y el nombre están correctamente asignados
     setUser({
       ...session.data.session.user,
-      role: userProfile.role,
+      role: userProfile.roles.name,
       name: userProfile.name,
-      pets: userProfile.pets || [] // Asegúrate de manejar casos donde no haya mascotas
+      pets: userProfile.pets || [] 
     });
   }
 }
   
-
-
-
 const logIn = async (formData) => {
   const { data, error } = await supabase.auth.signInWithPassword({
     email: formData.email,
@@ -55,7 +51,7 @@ const logIn = async (formData) => {
     // Suponiendo que la autenticación fue exitosa, obtenemos el rol.
     const { data: userProfile, error: profileError } = await supabase
       .from('users')
-      .select('roles(name)')
+      .select('roles!inner(name), name, pets!inner(*)')
       .eq('id', data.session.user.id)
       .single();
 
@@ -64,7 +60,12 @@ const logIn = async (formData) => {
       return false;
     }
 
-    setUser({ ...data.session.user, role: userProfile.roles.name });
+    setUser({
+      ...data.session.user,
+      role: userProfile.roles.name,
+      name: userProfile.name,
+      pets: userProfile.pets || [] 
+    });
     return true;
   }
 };

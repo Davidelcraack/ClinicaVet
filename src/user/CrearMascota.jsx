@@ -1,11 +1,21 @@
-import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useContext, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { supabase } from '../helpers/supabase';
-import { UserAuthContext } from '../context/UserAuthContext'; 
+import { UserAuthContext } from '../context/UserAuthContext';
+import NavbarUser from './NavbarUser';
+
 
 function CrearMascota() {
-  const { user } = useContext(UserAuthContext); // Destructure user directly
+  const { user } = useContext(UserAuthContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+        navigate("/permission");
+    } else {
+      
+    }
+}, [user, navigate]); 
   
   const [formData, setFormData] = useState({
       name: '',
@@ -62,24 +72,17 @@ function CrearMascota() {
       }
   };
 
-  const handleVolver = () => {
-    navigate("/");
-  }
-
-  const handleCita = () => {
-    navigate("/crear-cita");
-  }
-
   return (
   <div className='bg-sky-200'>
+    <NavbarUser />
    <div className='relative z-0 filter'>
         <img src='/images/banner.jpg' className='w-full h-auto'></img>
         <h2 className='text-2xl font-bold text-center text-[#004f6f]'>Por favor rellena el siguiente formulario para la creación de su mascota</h2>
     </div>
-    <section className=''>
-      <div className='py-8 px-4 mx-6 max-w-2x1 lg:py-16'>
-        <h2 className='mb-4 text-xl font-bold text-gray-900'>Registre su mascota</h2>
-        <form onSubmit={handleSubmit}>
+    <section className='py-4'>
+      <div className='max-w-7xl mx-auto sm:px-4 lg:px-6 overflow-hidden shadow-sm sm:rounded-lg bg-sky-300 pb-6'>
+        <h2 className='py-4 text-black font-bold'>Registre su mascota</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
           {error && <div style={{ color: 'red' }}>{error}</div>}
           {success && <div style={{ color: 'green' }}>{success}</div>}
 
@@ -124,8 +127,7 @@ function CrearMascota() {
           </div>
           
           <button onClick={handleSubmit} type="submit" className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-primary-200">Registrar Mascota</button>
-          <button onClick={handleVolver} className="ml-6 inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-primary-200">Volver</button>
-          <button onClick={handleCita} className="ml-6 inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-primary-200">Ya tengo una mascota registrada</button>
+          <Link to="/dashboard" className="ml-6 inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-primary-200">Ya tengo una mascota registrada</Link>
         </form>
       </div>
     </section>

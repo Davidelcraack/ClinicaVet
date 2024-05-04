@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../helpers/supabase';
 import { UserAuthContext } from '../context/UserAuthContext'; 
@@ -6,6 +6,14 @@ import { UserAuthContext } from '../context/UserAuthContext';
 function CrearUsuario() {
   const { user } = useContext(UserAuthContext); 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+        navigate("/permission");
+    } else {
+      
+    }
+    }, [user, navigate]); 
   
   const [formData, setFormData] = useState({
     name: '',

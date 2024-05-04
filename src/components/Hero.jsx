@@ -10,25 +10,37 @@ const Hero = () => {
   const navigate = useNavigate();
 
   console.log(user)
+
   const handleClick = () => {
     if (user) {
-      if (user.role === "admin") {
-        navigate("/admin");
-      } else if (!user.name) {
-        navigate("/crear-usuario");
-      } else if (user.pets.length > 0) {
-        navigate("/crear-cita");
-      } else {
-        navigate("/crear-mascota");
-      }
+        if (user.role === "admin") {
+            // Para los admins, sigue permitiéndoles agendar citas como un usuario normal.
+            if (!user.name) {
+                navigate("/crear-usuario");
+            } else if (user.pets.length > 0) {
+                navigate("/crear-cita");
+            } else {
+                navigate("/crear-mascota");
+            }
+        } else {
+            // Para usuarios que no son administradores.
+            if (!user.name) {
+                navigate("/crear-usuario");
+            } else if (user.pets.length > 0) {
+                navigate("/crear-cita");
+            } else {
+                navigate("/crear-mascota");
+            }
+        }
     } else {
-      navigate("/login");
+        navigate("/login");
     }
-  };
+};
 
-  const handleAdmin = () => {
-    navigate("/admin");
-  }
+const handleAdmin = () => {
+    // Navegación exclusiva para administradores al panel de administración.
+    navigate("/administrar-cita");
+};
 
 
 

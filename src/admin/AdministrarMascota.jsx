@@ -29,8 +29,9 @@ function AdministrarMascota() {
               age,
               weight,
               medical_history,
+              doctor_notes,
               owner_id,
-              owner:users!owner_id (id, name, last_name, phone)
+              owner:users!owner_id (id, name, last_name, phone, email)
           `);
   
       if (error) {
@@ -41,7 +42,7 @@ function AdministrarMascota() {
   
       // Asumiendo que la información del propietario está correctamente cargada desde la tabla 'users'
       const petsWithOwnerInfo = data.map(pet => {
-          const ownerInfo = pet.owner ? { name: pet.owner.name, last_name: pet.owner.last_name, phone: pet.owner.phone } : { name: 'Desconocido', phone: 'No disponible' };
+          const ownerInfo = pet.owner ? { name: pet.owner.name, last_name: pet.owner.last_name, phone: pet.owner.phone, email: pet.owner.email } : { name: 'Desconocido', phone: 'No disponible' };
           return {
               ...pet,
               owner: ownerInfo
@@ -50,12 +51,28 @@ function AdministrarMascota() {
   
       setPets(petsWithOwnerInfo);
   };
-  
+
+  const deletePet = async (petId) => {
+    const { data, error } = await supabase
+        .from('pets')
+        .delete()
+        .match({ id: petId });
+
+        if (error) {
+            setError('Error al eliminar la mascota: ' + error.message);
+        } else {
+            setPets(pets.filter(pet => pet.id !== petId)); // Actualizar el estado para remover la mascota eliminada
+        }
+    };
+
+    const editPet = (petId) => {
+        navigate(`/editar-mascota/${petId}`); // Navegar a la ruta de edición, asegúrate de crear esta ruta y componente
+    };
 
     return (
-        <div className='bg-sky-200 w-screen h-screen'>
+        <div className='bg-sky-200'>
             <NavbarAdmin/>
-            <div className='relative z-0 filter bg-sky-200'>
+            <div className='relative z-0 filter'>
                 <img src='/images/banner.jpg' className='w-full h-auto'></img>
                 <h2 className='text-3xl font-bold text-center text-[#004f6f]'>Gestión de mascotas</h2>
             </div>
@@ -66,20 +83,24 @@ function AdministrarMascota() {
                     <table className='w-full text-sm text-center rtl:text-right text-gray-500'>
                         <thead className='text-gray-800 uppercase bg-sky-400'>
                             <tr>
-                                <th scope='col' className='px-6'>Nombre del dueño</th>
+                                <th scope='col' className='px-6'>Dueño</th>
+                                <th scope='col' className='px-10'>Correo electronico</th>
                                 <th scope='col' className='px-6'>Teléfono</th>
                                 <th scope='col' className='px-6'>Nombre de la mascota</th>
                                 <th scope='col' className='px-6'>Especie</th>
                                 <th scope='col' className='px-6'>Género</th>
-                                <th scope='col' className='px-6'>Edad</th>
-                                <th scope='col' className='px-6'>Peso</th>
-                                <th scope='col' className='px-6'>Descripción</th>
+                                <th scope='col' className='px-4'>Edad</th>
+                                <th scope='col' className='px-4'>Peso</th>
+                                <th scope='col' className='px-16'>Descripción</th>
+                                <th scope='col' className='px-16'>Notas medicas</th>
+                                <th scope='col' className='px-6'>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             {pets.map((pet) => (
                                 <tr className='odd:bg-sky-300 font-semibold even:bg-sky-200 border-b text-gray-600' key={pet.id}>
                                     <td>{pet.owner.name} {pet.owner.last_name}</td>
+                                    <td>{pet.owner.email}</td>
                                     <td>{pet.owner.phone}</td>
                                     <td className='px-6 py-4'>{pet.name}</td>  
                                     <td className='px-6 py-4'>{pet.species}</td>  
@@ -87,6 +108,11 @@ function AdministrarMascota() {
                                     <td className='px-6 py-4'>{pet.age}</td>  
                                     <td className='px-6 py-4'>{pet.weight}</td> 
                                     <td className='px-6 py-4'>{pet.medical_history}</td>
+                                    <td className='px-6 py-4'>{pet.doctor_notes}</td>
+                                    <td className='px-6 py-4'>
+                                        <button onClick={() => editPet(pet.id)} className="text-blue-500 hover:text-blue-700">Editar</button>
+                                        <button onClick={() => deletePet(pet.id)} className="text-red-500 hover:text-red-700 ml-4">Eliminar</button>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
