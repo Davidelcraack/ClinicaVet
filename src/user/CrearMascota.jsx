@@ -121,8 +121,8 @@ function CrearMascota() {
             </div>
           
             <div className='sm:col-span-2'>
-              <label className='block mb-2 text-sm font-medium text-gray-900'>Historial Medico</label>
-              <textarea rows="3" className='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500' name="medical_history" value={formData.medical_history} onChange={handleChange} placeholder="Historia Medica" required ></textarea>
+              <label className='block mb-2 text-sm font-medium text-gray-900'>Descripción</label>
+              <textarea rows="3" className='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500' name="medical_history" value={formData.medical_history} onChange={handleChange} placeholder="añade una breve descripcion de tu mascota" required ></textarea>
             </div>
           </div>
           

@@ -22,21 +22,25 @@ const AdministrarDetallesCita = () => {
       .eq('is_available', true)
       .order('date', { ascending: true }) // Ordenar por fecha
       .order('start_time', { ascending: true }); // y luego por hora de inicio
-
+  
     if (error) {
       setError('Error al cargar los horarios: ' + error.message);
     } else {
       const formattedSlots = data.map(slot => {
+        const startDate = new Date(`${slot.date}T${slot.start_time}`);
+        const endDate = new Date(`${slot.date}T${slot.end_time}`);
         return {
           ...slot,
-          formattedDate: new Date(slot.date).toLocaleDateString(),
-          formattedStartTime: new Date(`${slot.date}T${slot.start_time}`).toLocaleTimeString([], { timeStyle: 'short' }),
-          formattedEndTime: new Date(`${slot.date}T${slot.end_time}`).toLocaleTimeString([], { timeStyle: 'short' }),
+          formattedDate: startDate.toLocaleString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }), // Agregar el día, mes y año
+          formattedStartTime: startDate.toLocaleTimeString('es-ES', { hour: 'numeric', minute: '2-digit', hour12: true }), // Formato AM/PM
+          formattedEndTime: endDate.toLocaleTimeString('es-ES', { hour: 'numeric', minute: '2-digit', hour12: true }), // Formato AM/PM
         };
       });
       setAvailableSlots(formattedSlots);
     }
   };
+  
+  
 
   // Función para añadir un nuevo horario disponible
   const handleAddAvailableSlot = async () => {

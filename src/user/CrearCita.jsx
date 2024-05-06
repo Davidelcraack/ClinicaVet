@@ -142,7 +142,7 @@ useEffect(() => {
   navigate("/dashboard")
 };
 
-  return (
+return (
   <div className='bg-sky-200'>
     <NavbarUser/>
     {/* Resto del componente */}
@@ -151,28 +151,26 @@ useEffect(() => {
         <h2 className='text-2xl font-bold text-center text-[#004f6f]'>Por favor rellena el siguiente formulario para la creación de su cita</h2>
     </div>
     <section className='py-4'>
-      <div className='max-w-7xl mx-auto sm:px-4 lg:px-6 overflow-hidden shadow-sm sm:rounded-lg bg-sky-300 pb-6'>
-        <h2 className='py-4 text-xl font-bold text-black'>Crear Cita</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {error && <div style={{ color: 'red' }}>{error}</div>}
-          {success && <div style={{ color: 'green' }}>{success}</div>}
+      <div className='max-w-4xl mx-auto sm:px-4 lg:px-6 overflow-hidden shadow-lg sm:rounded-lg bg-sky-300 pb-6'>
+        <h2 className='pt-4 pb-2 text-xl font-bold text-black text-center'>Crear Cita</h2>
+        <form onSubmit={handleSubmit} className="space-y-6 p-6">
+          {error && <div className='text-red-500 text-center'>{error}</div>}
+          {success && <div className='text-green-500 text-center'>{success}</div>}
 
           {/* Selector de mascota */}
-          <div className='grid gap-4 sm:grid-cols-2 sm:gap-6'>
-          <div className='sm:col-span-2'>
+          <div>
             <label className='block mb-2 text-sm font-medium text-gray-900'>Selecciona tu mascota:</label>
             <select
               name="selectedPet"
               value={formData.selectedPet}
               onChange={handleChange}
               required
-              className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5' >
+              className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5' >
               <option value="">Elige una mascota</option>
               {pets.map((pet) => (
                 <option key={pet.id} value={pet.id}>{pet.name}</option>
               ))}
             </select>
-          </div>
           </div>
 
           {/* Selector de servicio */}
@@ -183,7 +181,7 @@ useEffect(() => {
               value={formData.selectedService}
               onChange={handleChange}
               required
-              className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5'>
+              className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5'>
               <option value="">Elige un servicio</option>
               {services.map((service) => (
                 <option key={service.id} value={service.id}>{service.description}</option>
@@ -192,33 +190,34 @@ useEffect(() => {
           </div>
 
           {/* Selector de horario */}
-            <div>
-              <label className='block mb-2 text-sm font-medium text-gray-900'>Selecciona el horario:</label>
-              <select
-                name="selectedSlot"
-                value={formData.selectedSlot}
-                onChange={handleChange}
-                required
-                className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5'>
-                <option value="">Elige un horario</option>
-                {availableSlots.map((slot) => (
-                  <option key={slot.id} value={slot.id}>
-                    {slot.displayString} {/* Usar el string formateado para mostrar */}
-                  </option>
-                ))}
-              </select>
-            </div>
+          <div>
+            <label className='block mb-2 text-sm font-medium text-gray-900'>Selecciona el horario:</label>
+            <select
+              name="selectedSlot"
+              value={formData.selectedSlot}
+              onChange={handleChange}
+              required
+              className='w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5'>
+              <option value="">Elige un horario</option>
+              {availableSlots.map((slot) => (
+                <option key={slot.id} value={slot.id}>
+                  {slot.displayString}
+                </option>
+              ))}
+            </select>
+          </div>
 
           {/* Botones */}
-          <div className='flex justify-between items-center p-4'>
-          <button type="submit" className="px-4 py-2 text-white bg-blue-600 rounded-md flex-1">Crear Cita</button>
-          <Link to="/crear-mascota" className="mx-2 px-4 py-2 text-white bg-blue-600 rounded-md flex-1">Añadir mascota</Link>
+          <div className='flex justify-between items-center pt-4'>
+            <button type="submit" className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md flex-1 transition duration-150 ease-in-out">Crear Cita</button>
+            <Link to="/crear-mascota" className="mx-2 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md flex-1 transition duration-150 ease-in-out">Crear nueva mascota</Link>
           </div>
         </form>
       </div>
     </section>
   </div>
-  );
+);
+
 }
 
 export default CrearCita;
