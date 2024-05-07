@@ -2,7 +2,6 @@ import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { IoMdMenu } from "react-icons/io";
 import { RxCross1 } from "react-icons/rx";
-import { useNavigate } from 'react-router-dom';
 import { UserAuthContext } from '../context/UserAuthContext'; 
 
 
@@ -23,7 +22,9 @@ const Navbar = () => {
       <div className='z-100 flex justify-between items-center h-24 max-w-[100%] mx-auto px-4 text-white bg-[#0d6efd]'>
         {/* Logo */}
         <div className="flex items-center">
+          <Link to="/">
           <img src="images\logo.png" alt="Logo" className="h-10 w-auto mr-2" />
+          </Link>
           <h1 className='text-3xl font-bold text-[#fff]'>Clinica Veterinaria Ciudad Guzman</h1>
         </div>
         {/* Menu principal que se va cuando la pantalla es pequeña */}
@@ -45,7 +46,9 @@ const Navbar = () => {
       <ul className={`fixed z-10 left-0 top-0 w-[35%] h-full border-r-2 border-r-white text-white bg-[#0d6efd] ease-in-out transition-transform duration-500 ${nav ? 'transform translate-x-0' : 'transform -translate-x-full'}`}>
         {/* Logo */}
         <div className="flex items-center justify-center my-4">
+          <Link to="/">
           <img src="images\logo.png" alt="Logo" className="h-16 w-auto" />
+          </Link>
         </div>
         <li className="p-4 mt-3 border-b-2 border-b-white"><Link to="/">Inicio</Link></li>
         <li className="p-4 border-b-2 border-b-white"><Link to="/services">Servicios</Link></li>

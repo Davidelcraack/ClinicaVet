@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../helpers/supabase';
 import { UserAuthContext } from '../context/UserAuthContext'; 
+import { Toaster, toast } from 'sonner'
 
 function CrearUsuario() {
   const { user } = useContext(UserAuthContext); 
@@ -74,6 +75,11 @@ function CrearUsuario() {
               <div className='sm:col-span-2'>
                 <label className='block mb-2 text-sm font-medium text-gray-900'>Apellidos</label>
                 <input className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5' type="text" name="last_name" value={formData.last_name} onChange={handleChange} required />
+              </div>
+
+              <div className='sm:col-span-2'>
+                <label className='block mb-2 text-sm font-medium text-gray-900'>Correo electronico</label>
+                <input className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5' type="email" name="email" value={formData.email} onChange={handleChange} required />
               </div>
               
               <div className='w-full'>
