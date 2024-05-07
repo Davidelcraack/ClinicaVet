@@ -3,10 +3,12 @@ import { supabase } from '../helpers/supabase';
 import { UserAuthContext } from '../context/UserAuthContext';
 import { useNavigate } from 'react-router-dom';
 import NavbarAdmin from './NavbarAdmin';
+import { Toaster, toast } from 'sonner';
 
 function AdministrarMascota() {
     const { user } = useContext(UserAuthContext);
     const [pets, setPets] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('')
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
@@ -37,12 +39,12 @@ function AdministrarMascota() {
       if (error) {
           console.error('Error al cargar mascotas:', error);
           setError(error.message);
+          toast.error("Error al cargas las mascotas")
           return;
       }
   
-      // Asumiendo que la información del propietario está correctamente cargada desde la tabla 'users'
       const petsWithOwnerInfo = data.map(pet => {
-          const ownerInfo = pet.owner ? { name: pet.owner.name, last_name: pet.owner.last_name, phone: pet.owner.phone, email: pet.owner.email } : { name: 'Desconocido', phone: 'No disponible' };
+          const ownerInfo = pet.owner ? { name: pet.owner.name, last_name: pet.owner.last_name, phone: pet.owner.phone, email: pet.owner.email } : { name: 'Desconocido', phone: 'No disponible', email: 'No disponible' };
           return {
               ...pet,
               owner: ownerInfo
@@ -59,28 +61,59 @@ function AdministrarMascota() {
         .match({ id: petId });
 
         if (error) {
-            setError('Error al eliminar la mascota: ' + error.message);
+            toast.error("Error al intentar eliminar la persona");
         } else {
-            setPets(pets.filter(pet => pet.id !== petId)); // Actualizar el estado para remover la mascota eliminada
+            setPets(pets.filter(pet => pet.id !== petId));
+            toast.success("Mascota eliminada correctamente")
         }
     };
 
+    const handleSearchChange = (e) => {
+        const query = e.target.value;
+        setSearchQuery(query);
+    
+        if (!query) {
+            // Si la consulta está vacía, muestra todas las mascotas
+            fetchPets();
+        } else {
+            // Filtra las mascotas en tiempo real basándote en la consulta
+            const filteredPets = pets.filter(pet =>
+                pet.name.toLowerCase().includes(query.toLowerCase())
+            );
+            setPets(filteredPets);
+        }
+    };    
+
     const editPet = (petId) => {
-        navigate(`/editar-mascota/${petId}`); // Navegar a la ruta de edición, asegúrate de crear esta ruta y componente
+        navigate(`/editar-mascota/${petId}`);
     };
 
     return (
+        <>
+        <Toaster position="top-right" richColors/>
         <div className='bg-sky-200'>
             <NavbarAdmin/>
             <div className='relative z-0 filter'>
                 <img src='/images/banner.jpg' className='w-full h-auto'></img>
-                <h2 className='text-3xl font-bold text-center text-[#004f6f]'>Gestión de mascotas</h2>
+                <h2 className='text-3xl m-4 font-bold text-center text-[#004f6f]'>Gestión de mascotas</h2>
             </div>
 
             <div className='max-w-7xl mx-auto sm:px-4 lg:px-6 overflow-hidden shadow-sm sm:rounded-lg bg-sky-300 pb-6'>
-                <h3 className='py-4 text-black font-bold'>Mascotas registradas</h3>
-                <div className='relative overflow-x-auto shadow-md sm:rounded-lg bg-sky-200'>
-                    <table className='w-full text-sm text-center rtl:text-right text-gray-500'>
+            <h2 className='py-4 mt-2 text-black font-bold'>Mascotas registradas</h2>
+            <div className='flex flex-row justify-end pb-4'>
+              <label className='flex p-2.5 text-sm font-medium text-gray-900' htmlFor="mascotas">Mascota:</label>
+                <input
+                    className= "flex bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5"
+                    type="search"
+                    id="mascotas"
+                    name="mascotas"
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                    placeholder="Escribe para buscar..."
+                />
+            </div>
+              <div className='relative overflow-x-auto shadow-md sm:rounded-lg bg-sky-200'>
+                    <table id="mascotas" className='w-full text-sm text-center rtl:text-right text-gray-500'>
                         <thead className='text-gray-800 uppercase bg-sky-400'>
                             <tr>
                                 <th scope='col' className='px-6'>Dueño</th>
@@ -120,6 +153,7 @@ function AdministrarMascota() {
                 </div>
             </div>
         </div>
+    </>
     );
 }
 export default AdministrarMascota;
