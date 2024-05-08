@@ -5,6 +5,7 @@ import html2canvas from "html2canvas";
 import NavbarAdmin from './NavbarAdmin';
 import { supabase } from '../helpers/supabase';
 import { UserAuthContext } from "../context/UserAuthContext";
+import { Toaster, toast } from "sonner";
 
 const AdministrarCita = () => {
   const { user } = useContext(UserAuthContext);
@@ -94,10 +95,26 @@ const AdministrarCita = () => {
         pdf.save("tabla_citas.pdf");
       });
   };
+
+  const handleDeleteCita = async (appoimentId) => {
+    const {data, error} = await supabase
+    .from('appoiments')
+    .delete()
+    .match({id: appoimentId});
   
+    if(error){
+      toast.error("Error al intentar eliminar la cita")
+      return;
+    }
+    setCitas(appoiments.filter(cita => cita.id !== appoimentId));
+    toast.success("Cita eliminada correctamente");
+  }
+
+
 
   return (
     <div className='bg-sky-200 pb-20'>
+      <Toaster position="top-right" richColors/>
       <NavbarAdmin/>
       <div className='relative z-0 filter pb-4'>
         <img src='/images/banner.jpg' className='w-full h-auto '></img>

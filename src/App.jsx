@@ -17,6 +17,7 @@ import EditarMascota from './admin/EditarMascota';
 import AdministrarServicios from './admin/AdministrarServicios';
 import CrearUsuario from './user/CrearUsuario';
 import Dashboard from './user/Dashboard';
+import Message from './auth/Message';
 
 function App() {
 
@@ -42,6 +43,7 @@ function App() {
         <Route path='/administrar-servicios' element={<AdministrarServicios/>}/>
         <Route path='/crear-usuario' element={<CrearUsuario/>}/>
         <Route path='/permission' element={<Permission/>}/>
+        <Route path='/message' element={<Message/>} />
       </Routes>
     </UserAuthProvider>
   </Router>

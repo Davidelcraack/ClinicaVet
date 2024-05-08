@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { supabase } from '../helpers/supabase';
 import { UserAuthContext } from '../context/UserAuthContext';
 import NavbarUser from './NavbarUser';
+import { Toaster, toast } from 'sonner';
 
 
 function CrearMascota() {
@@ -33,47 +34,56 @@ function CrearMascota() {
   };
 
   const handleSubmit = async (e) => {
-      e.preventDefault();
-      setSuccess('');
-      setError('');
+    e.preventDefault();
+    setSuccess('');
+    setError('');
 
-      // Check for positive values for age and weight
-      if (parseInt(formData.age) <= 0 || parseInt(formData.weight) <= 0) {
-          setError('La edad y el peso deben ser valores positivos.');
-          return;
-      }
+    // Validar que la edad y el peso sean valores positivos
+    if (parseInt(formData.age) <= 0 || parseInt(formData.weight) <= 0) {
+        setError('La edad y el peso deben ser valores positivos.');
+        return;
+    }
 
-      // Ensure user is defined before using its ID
-      if (!user || !user.id) {
-          setError('Usuario no definido.');
-          return;
-      }
+    // Validar que el usuario está definido y tiene un ID
+    if (!user || !user.id) {
+        setError('Usuario no definido.');
+        return;
+    }
 
-      const { data: petData, error: petError } = await supabase
-      .from('pets')
-      .insert([{
-        ...formData,
-        owner_id: user.id // Now correctly using the user's ID from context
-      }]);
+    // Validar que los campos requeridos no estén vacíos
+    if (!formData.name || !formData.species || !formData.gender || !formData.age || !formData.weight) {
+        toast.error('Por favor complete todos los campos requeridos.');
+        return;
+    }
 
-      if (petError) {
-          setError('Error al registrar la mascota: ' + petError.message);
-      } else {
-          setSuccess('Mascota registrada con éxito!');
-          // Resetting form data
-          setFormData({
-              name: '',
-              species: '',
-              gender: '',
-              age: '',
-              weight: '',
-              medical_history: ''
-          });
-      }
-  };
+    // Intento de registro de la mascota
+    const { data: petData, error: petError } = await supabase
+    .from('pets')
+    .insert({
+      ...formData,
+      owner_id: user.id
+    });
+
+    if (petError) {
+      toast.error("Ha ocurrido un error inesperado, por favor vuelve a intentarlo más tarde")
+      setError('Error al registrar la mascota: ' + petError.message);
+    } else {
+      toast.success("Mascota registrada con éxito")
+      // Reseteo de los datos del formulario
+      setFormData({
+          name: '',
+          species: '',
+          gender: '',
+          age: '',
+          weight: '',
+          medical_history: ''
+      });
+    }
+};
 
   return (
   <div className='bg-sky-200'>
+    <Toaster position="top-right" richColors/>
     <NavbarUser />
    <div className='relative z-0 filter'>
         <img src='/images/banner.jpg' className='w-full h-auto'></img>

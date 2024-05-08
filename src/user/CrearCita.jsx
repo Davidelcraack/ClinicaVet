@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { supabase } from '../helpers/supabase';
 import { UserAuthContext } from '../context/UserAuthContext';
 import NavbarUser  from './NavbarUser';
+import { Toaster, toast } from 'sonner';
 
 function CrearCita() {
   const { user } = useContext(UserAuthContext);
@@ -120,6 +121,7 @@ useEffect(() => {
 
   if (appointmentError) {
     setError('Error al crear la cita: ' + appointmentError.message);
+    toast.error("Ha ocurrido un error inesperado")
     return; // Detén la ejecución si hay un error
   } 
 
@@ -131,7 +133,7 @@ useEffect(() => {
   if (slotUpdateError) {
     setError('Error al actualizar el slot: ' + slotUpdateError.message);
   } else {
-    setSuccess('Cita creada con éxito!');
+    toast.success("Cita creada con exito");
     // Opcional: resetear formulario o redirigir
     setFormData({
       selectedPet: '',
@@ -145,6 +147,7 @@ useEffect(() => {
 return (
   <div className='bg-sky-200'>
     <NavbarUser/>
+    <Toaster position="top-right" richColors/>
     {/* Resto del componente */}
     <div className='relative z-0 filter'>
         <img src='/images/banner.jpg' className='w-full h-auto'></img>

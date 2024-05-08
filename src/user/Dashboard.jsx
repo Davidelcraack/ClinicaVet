@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { supabase } from '../helpers/supabase';
 import { UserAuthContext } from '../context/UserAuthContext';
 import NavbarUser from './NavbarUser';
+import { Toaster,toast } from 'sonner';
 
 function Dashboard() {
   const { user } = useContext(UserAuthContext);
@@ -40,23 +41,35 @@ function Dashboard() {
           slot: slot_id (date, start_time)
         `)
         .in('pets_id', petsData.map(pet => pet.id)); // Filtering appointments based on the owner's pets
-
+        toast.success("Información cargada correctamente");
       if (citasError) throw citasError;
       setCitas(citasData);
     } catch (error) {
       setError(`Error al cargar los datos: ${error.message}`);
+      toast.error("Error a la hora de obtener los datos");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className='bg-sky-200'>
+    <div className='bg-sky-200 pb-12'>
+      <Toaster position="top-right" richColors/>
       <NavbarUser />
       <div className='relative z-0 filter'>
         <img src='/images/banner.jpg' className='w-full h-auto' alt='Banner' />
       </div>
-  
+      
+     {/* Agregar aquí el div de Solicitar Cancelación de Cita */}
+     <div className='bg-sky-400 p-4 my-4 shadow rounded-lg'>
+          <h3 className="text-lg font-semibold text-gray-800">Solicitar Cancelación de Cita</h3>
+          <p className="text-gray-700">Si necesita cancelar su cita, por favor contacte a nuestro equipo:</p>
+          <ul className="list-none space-y-1">
+            <li className="text-gray-900 font-medium">Teléfono: <span className="text-gray-700">+1 234 567 8900</span></li>
+            <li className="text-gray-900 font-medium">Correo electrónico: <a href="mailto:cancelaciones@clinica.com" className="text-blue-600 hover:text-blue-800">cancelaciones@clinica.com</a></li>
+          </ul>
+        </div>
+
       {loading ? (
         <p>Cargando datos...</p>
       ) : error ? (
@@ -114,7 +127,7 @@ function Dashboard() {
 
            <div className='flex justify-between'>           
            <h2 className="flex-row p-2 my-6 text-black font-bold">Mis Mascotas</h2>
-           <Link to="crear-mascota" className="flex-row justify-end p-2 rounded-xl   bg-[#0d6efd] text-white my-6 text-md font-medium active:scale-[.98] active:duration-75 hover:scale-[1.01] ease-in-out transition-all ">Crear mascota</Link>
+           <Link to="/crear-mascota" className="flex-row justify-end p-2 rounded-xl   bg-[#0d6efd] text-white my-6 text-md font-medium active:scale-[.98] active:duration-75 hover:scale-[1.01] ease-in-out transition-all ">Crear mascota</Link>
            </div>
  
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -166,12 +179,16 @@ function Dashboard() {
                   )) : <tr><td colSpan="6" className="text-center py-5">No tienes mascotas registradas.</td></tr>}
                 </tbody>
               </table>
-            </div>
-            
+            </div>   
           </section>
+          <div className="flex justify-start items-end h-full">
+            <Link to="/" className="mt-8 p-2 rounded-xl bg-[#0d6efd] text-white my-6 text-md font-medium active:scale-[.98] active:duration-75 hover:scale-[1.01] ease-in-out transition-all">
+                Volver al inicio
+            </Link>
+          </div>
         </>
       )}
-      <Link to="/" className="mt-4 p-2 rounded-xl   bg-[#0d6efd] text-white my-6 text-md font-medium active:scale-[.98] active:duration-75 hover:scale-[1.01] ease-in-out transition-all ">Volver al inicio</Link>
+
     </div>
   );
 }

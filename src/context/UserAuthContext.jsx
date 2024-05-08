@@ -18,7 +18,7 @@ function UserAuthProvider({children}){
   if (session.data.session) {
     const { data: userProfile, error } = await supabase
       .from('users')
-      .select('roles!inner(name), name, pets!inner(*)') 
+      .select('roles!inner(name), name') 
       .eq('id', session.data.session.user.id)
       .single()
 
@@ -30,8 +30,7 @@ function UserAuthProvider({children}){
     setUser({
       ...session.data.session.user,
       role: userProfile.roles.name,
-      name: userProfile.name,
-      pets: userProfile.pets || [] 
+      name: userProfile.name
     });
   }
 }
@@ -51,7 +50,7 @@ const logIn = async (formData) => {
     // Suponiendo que la autenticación fue exitosa, obtenemos el rol.
     const { data: userProfile, error: profileError } = await supabase
       .from('users')
-      .select('roles!inner(name), name, pets!inner(*)')
+      .select('roles!inner(name), name')
       .eq('id', data.session.user.id)
       .single();
 
@@ -64,7 +63,6 @@ const logIn = async (formData) => {
       ...data.session.user,
       role: userProfile.roles.name,
       name: userProfile.name,
-      pets: userProfile.pets || [] 
     });
     return true;
   }
@@ -98,8 +96,6 @@ const logIn = async (formData) => {
   }
   
   return(
-    
-
     <UserAuthContext.Provider value={{user, logIn, logOut, signUp}}>
       {children}
     </UserAuthContext.Provider>

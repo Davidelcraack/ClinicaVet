@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { supabase } from '../helpers/supabase';
 import { UserAuthContext } from '../context/UserAuthContext';
 import { useNavigate } from 'react-router-dom';
+import { Toaster, toast } from 'sonner';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -21,15 +22,24 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Verificación si los campos están vacíos
+    if (!formData.email || !formData.password) {
+      toast.warning("Todos los campos son obligatorios.");
+      return; // Sale de la función para no proceder con el registro
+    }
+    // Intentar registrar al usuario
     const { error } = await signUp(formData);
     if (!error) {
-      navigate("/login");
+      navigate("/message");
     } else {
       console.error("Error de registro:", error.message);
-      // Aquí podrías mostrar un mensaje de error en la UI.
+      toast.error("Error al intentar crear un usuario: " + error.message);
     }
-  };
+  }
   return (
+  <>
+   <Toaster position="top-right" richColors/>
     <div className="min-h-screen flex items-center justify-center bg-gray-50"> {/* Contenedor exterior para centrar vertical y horizontalmente */}
       <div className='bg-white px-10 py-20 rounded-3xl border-2 border-gray-100 shadow-lg max-w-md w-full'> {/* Ajusta el tamaño máximo y ancho completo dentro del flex */}
         <h1 className='text-5xl font-semibold text-center'>Crear una cuenta</h1>
@@ -59,6 +69,7 @@ const Register = () => {
         </div>
       </div>
     </div>
+    </>
   );  
 };
 

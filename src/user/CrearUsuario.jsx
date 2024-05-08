@@ -47,17 +47,20 @@ function CrearUsuario() {
 
     if (userError) {
       setError('Error al actualizar el usuario: ' + userError.message);
+      toast.error("Error al actualizar el usuario");
     } else {
       setSuccess('Usuario registrado con éxito!');
-      navigate("/crear-mascota"); // Redirigir para registrar mascota
+      toast.success("Usuario registrado con exito");
+      navigate("/dashboard");
     }
   };
 
   return (
-    <div className='bg-sky-200'>
+    <div className='bg-sky-200 pb-20'>
+      <Toaster position="top-right" richColors/>
       <div className='relative z-0 filter'>
         <img src='/images/banner.jpg' className='w-full h-auto'></img>
-        <h2 className='text-2xl font-bold text-center text-[#004f6f]'>Por favor rellena el siguiente formulario para la verificacion de su informacion</h2>
+        <h2 className='text-2xl font-bold text-center text-[#004f6f]'>Por favor completa el siguiente formulario para la verificación de su información</h2>
       </div>
       <section className=''>
         <div className='py-8 px-4 mx-6 max-w-2x1 lg:py-16'>
@@ -78,12 +81,12 @@ function CrearUsuario() {
               </div>
 
               <div className='sm:col-span-2'>
-                <label className='block mb-2 text-sm font-medium text-gray-900'>Correo electronico</label>
+                <label className='block mb-2 text-sm font-medium text-gray-900'>Correo electrónico</label>
                 <input className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5' type="email" name="email" value={formData.email} onChange={handleChange} required />
               </div>
               
-              <div className='w-full'>
-                <label className='block mb-2 text-sm font-medium text-gray-900'>Numero de telefono</label>
+              <div className='sm:col-span-2'>
+                <label className='block mb-2 text-sm font-medium text-gray-900'>Número de teléfono</label>
                 <input className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5' type="phone" name="phone" value={formData.phone} onChange={handleChange} placeholder='número de telefono' required/>
               </div>
             </div>
