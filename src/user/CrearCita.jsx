@@ -17,14 +17,6 @@ function CrearCita() {
     }
     }, [user, navigate]); 
 
-  const handleMascota = () => {
-    navigate("/crear-mascota");
-  };
-
-  const handleVolver = () => {
-    navigate("/");
-  };
-
   // Estados iniciales
   const [pets, setPets] = useState([]);
   const [services, setServices] = useState([]);
@@ -83,10 +75,18 @@ useEffect(() => {
         const fullDate = new Date(`${slot.date}T${slot.start_time}`);
         return {
           ...slot,
-          displayString: `${fullDate.toLocaleDateString()} ${fullDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`, // Usa opciones para mostrar solo la hora y los minutos
+          displayString: `${fullDate.toLocaleDateString('es-ES', {
+            weekday: 'long', // nombre del día de la semana
+            year: 'numeric', // año en formato numérico
+            month: 'long', // nombre del mes
+            day: 'numeric' // día del mes
+          })}, ${fullDate.toLocaleTimeString('es-ES', {
+            hour: '2-digit', // hora en formato de 2 dígitos
+            minute: '2-digit', // minuto en formato de 2 dígitos
+            hour12: true // usa el formato AM/PM
+          })}` // Combina la fecha y la hora en un string
         };
       });
-
       setAvailableSlots(formattedSlots);
     }
   };
@@ -213,7 +213,7 @@ return (
           {/* Botones */}
           <div className='flex justify-between items-center pt-4'>
             <button type="submit" className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md flex-1 transition duration-150 ease-in-out">Crear Cita</button>
-            <Link to="/crear-mascota" className="mx-2 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md flex-1 transition duration-150 ease-in-out">Crear nueva mascota</Link>
+            <Link to="/crear-mascota" className="mx-2 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md flex-1 transition duration-150 ease-in-out">Añadir mascota</Link>
           </div>
         </form>
       </div>

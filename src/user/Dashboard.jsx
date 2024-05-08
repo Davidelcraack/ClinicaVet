@@ -127,7 +127,7 @@ function Dashboard() {
 
            <div className='flex justify-between'>           
            <h2 className="flex-row p-2 my-6 text-black font-bold">Mis Mascotas</h2>
-           <Link to="/crear-mascota" className="flex-row justify-end p-2 rounded-xl   bg-[#0d6efd] text-white my-6 text-md font-medium active:scale-[.98] active:duration-75 hover:scale-[1.01] ease-in-out transition-all ">Crear mascota</Link>
+           <Link to="/crear-mascota" className="flex-row justify-end p-2 rounded-xl   bg-[#0d6efd] text-white my-6 text-md font-medium active:scale-[.98] active:duration-75 hover:scale-[1.01] ease-in-out transition-all ">Añadir mascota</Link>
            </div>
  
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -152,6 +152,9 @@ function Dashboard() {
                     <th scope='col' className="px-6 py-3 border-b-2 border-gray-200  text-left text-xs font-semibold text-gray-900 uppercase tracking-wider">
                       Descripción
                     </th>
+                    <th scope='col' className="px-6 py-3 border-b-2 border-gray-200  text-left text-xs font-semibold text-gray-900 uppercase tracking-wider">
+                      Notas posteriores a la cita
+                    </th>
                   </tr>
                 </thead>
                 <tbody className='border-collapse border border-gray-500'>
@@ -174,6 +177,9 @@ function Dashboard() {
                       </td>
                       <td  className="px-5 py-5 border-b border-gray-400 text-sm">
                         {pet.medical_history}
+                      </td>
+                      <td  className="px-5 py-5 border-b border-gray-400 text-sm">
+                        {pet.doctor_notes}
                       </td>
                     </tr>
                   )) : <tr><td colSpan="6" className="text-center py-5">No tienes mascotas registradas.</td></tr>}
