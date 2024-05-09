@@ -105,11 +105,27 @@ function EditarMascota() {
             </label>
             <label className='block mb-2 text-sm font-medium text-gray-900'>
                 Especie:
-                <input className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5' type="text" name="species" value={pet.species} onChange={handleChange} />
+                <select 
+                className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
+                name="species"
+                value={pet.species}
+                onChange={handleChange}
+                >
+                <option value="Perro">Perro</option>
+                <option value="Gato">Gato</option>
+                </select>
             </label>
             <label className='block mb-2 text-sm font-medium text-gray-900'>
                 Género:
-                <input className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5' type="text" name="gender" value={pet.gender} onChange={handleChange} />
+                <select 
+                className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
+                name="gender"
+                value={pet.gender}
+                onChange={handleChange}
+                >
+                <option value="Macho">Macho</option>
+                <option value="Hembra">Hembra</option>
+                </select>
             </label>
             <label className='block mb-2 text-sm font-medium text-gray-900'>
                 Edad:

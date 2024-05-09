@@ -45,7 +45,7 @@ const handleAdmin = () => {
     <div className='relative text-white z-0'>
       <div className='relative bg-hero z-1 bg-no-repeat bg-cover bg-white/95 filter text-white h-screen flex flex-col justify-center items-center text-balance '>
         {/* Contenido */}
-        <div className='relative z-50 max-w-[90%] md:max-w-[800px] mx-auto text-center  rounded-xl bg-black/15 leading-relaxed '>
+        <div className='relative z-50 max-w-[90%] md:max-w-[800px] mx-auto text-center  rounded-xl bg-black/20 leading-relaxed '>
           <h1 className='text-balance md:text-6xl sm:text-5xl text-4xl font-bold md:py-6 ' >
             SERVICIOS VETERINARIOS <span className="md:text-5xl sm:text-4xl text-3xl font-bold md:py-6">CIUDAD GUZMAN</span>
           </h1>

@@ -17,9 +17,6 @@ const Home = () => {
       <Navbar />
       <Hero />
       {/* Aquí puedes añadir el resto*/}
-      <div>
-        <button onClick={handleLogout}>Logout</button>
-      </div>
     </div>
   );
 };
