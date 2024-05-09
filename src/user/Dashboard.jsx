@@ -65,8 +65,8 @@ function Dashboard() {
           <h3 className="text-lg font-semibold text-gray-800">Solicitar Cancelación de Cita</h3>
           <p className="text-gray-700">Si necesita cancelar su cita, por favor contacte a nuestro equipo:</p>
           <ul className="list-none space-y-1">
-            <li className="text-gray-900 font-medium">Teléfono: <span className="text-gray-700">+1 234 567 8900</span></li>
-            <li className="text-gray-900 font-medium">Correo electrónico: <a href="mailto:cancelaciones@clinica.com" className="text-blue-600 hover:text-blue-800">cancelaciones@clinica.com</a></li>
+            <li className="text-gray-900 font-medium">Teléfono: <span className="text-gray-700">+52 341 239 2552</span></li>
+            <li className="text-gray-900 font-medium">Correo electrónico: <a href="mailto:cancelaciones@clinica.com" className="text-blue-600 hover:text-blue-800">info@clinicaveterinariaguzman.com</a></li>
           </ul>
         </div>
 

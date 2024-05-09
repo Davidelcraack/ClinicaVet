@@ -14,7 +14,7 @@ const Contact = () => {
             </p>
             <div className='text-center'>
               <h3 className='text-lg font-semibold text-blue-700'>Teléfono</h3>
-              <p className='text-gray-600'>+52 3171291534</p>
+              <p className='text-gray-600'>+52 3412392552</p>
             </div>
             <div className='text-center'>
               <h3 className='text-lg font-semibold text-blue-700'>Correo Electrónico</h3>
@@ -22,8 +22,8 @@ const Contact = () => {
             </div>
             <p className='text-sm text-gray-500 text-center'>
               Estamos disponibles de lunes a viernes, de 10:00 am a 2:00 pm regresamos de 5:00 pm a 8:00 pm. <br></br>
-              Los sabados de 10: am a 2:00 pm. <br />
-              Los domingos estamos cerrados
+              Los sabados de 10:00 am a 2:00 pm. <br />
+              Los domingos cerrado
             </p>
           </div>
         </div>

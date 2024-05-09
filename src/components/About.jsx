@@ -85,7 +85,7 @@ const About = () => {
           <div className='col-span-2 bg-white shadow-lg p-6 rounded-lg flex flex-col items-center justify-center'>
              <h2 className='py-4 text-xl font-bold text-blue-800 mb-2'>Ubicación</h2>
              <p className='text-gray-600 text-lg pb-2 text-pretty'>
-                Visítanos en nuestra ubicación en: <a href='https://www.google.com/maps/place/Veterinaria+Ciudad+Guzm%C3%A1n/@19.6943991,-103.4660056,17z/data=!4m6!3m5!1s0x842f87614601f353:0xb5089a3df6476ce5!8m2!3d19.694682!4d-103.464128!16s%2Fg%2F11v6xyss6l?entry=ttu' className='text-sky-700'>Calle Gral. Ramón Corona Madrigal 467-A, Cd Guzmán Centro, 49000 Cdad. Guzmán, Jal.</a> Estamos convenientemente ubicados en el corazón del centro de Ciudad Guzmán, fácilmente accesibles desde cualquier parte de la ciudad. Nuestra clínica se encuentra cerca de importantes vías de comunicación y está rodeada de diversas opciones de estacionamiento.
+                Visítanos en nuestra ubicación en: <a href='https://www.google.com/maps/place/Veterinaria+Ciudad+Guzm%C3%A1n/@19.6943991,-103.4660056,17z/data=!4m6!3m5!1s0x842f87614601f353:0xb5089a3df6476ce5!8m2!3d19.694682!4d-103.464128!16s%2Fg%2F11v6xyss6l?entry=ttu' className='text-sky-700'>Calle Gral. Ramón Corona Madrigal 467-A, Cd Guzmán Centro, 49000 Cdad. Guzmán, Jal.</a> <br/><br/> Estamos convenientemente ubicados en el corazón del centro de Ciudad Guzmán, fácilmente accesibles desde cualquier parte de la ciudad. Nuestra clínica se encuentra cerca de importantes vías de comunicación y está rodeada de diversas opciones de estacionamiento.
               </p>
               <img className='rounded-xl shadow-lg w-3/4 h-auto' src="/images/ubicacion.png" alt="Ubicación de la Clínica"/>
           </div>
