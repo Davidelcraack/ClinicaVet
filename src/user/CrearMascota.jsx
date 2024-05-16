@@ -51,7 +51,7 @@ function CrearMascota() {
     }
 
     // Validar que los campos requeridos no estén vacíos
-    if (!formData.name || !formData.species || !formData.gender || !formData.age || !formData.weight) {
+    if (!formData.name || !formData.species || !formData.gender) {
         toast.error('Por favor complete todos los campos requeridos.');
         return;
     }
@@ -98,12 +98,12 @@ function CrearMascota() {
 
           <div className='grid gap-4 sm:grid-cols-2 sm:gap-6'>
             <div className='sm:col-span-2'>
-              <label className='block mb-2 text-sm font-medium text-gray-900'>Nombre de la mascota</label>
+              <label className='block mb-2 text-sm font-medium text-gray-900'>Nombre de la mascota <strong>*</strong></label>
               <input className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5' type="text" name="name" value={formData.name} onChange={handleChange} required />
             </div>
           
             <div className='w-full'>
-              <label className='block mb-2 text-sm font-medium text-gray-900'>Especie</label>
+              <label className='block mb-2 text-sm font-medium text-gray-900'>Especie <strong>*</strong></label>
                 <select className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5' name="species" value={formData.species} onChange={handleChange} required>
                   <option value="">Selecciona una especie</option>
                   <option value="Perro">Perro</option>
@@ -112,7 +112,7 @@ function CrearMascota() {
             </div>
 
             <div className='w-full'>
-              <label className='block mb-2 text-sm font-medium text-gray-900'>Género</label>
+              <label className='block mb-2 text-sm font-medium text-gray-900'>Género <strong>*</strong></label>
               <select className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5' name="gender" value={formData.gender} onChange={handleChange} required>
                 <option value="">Selecciona un género</option>
                 <option value="Hembra">Hembra</option>
