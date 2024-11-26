@@ -86,8 +86,8 @@ function CrearMascota() {
         <h2 className='text-2xl font-bold text-center text-[#004f6f]'>Por favor rellena el siguiente formulario para la creación de su mascota</h2>
       </div>
       <section className='py-4'>
-        <div className='max-w-7xl mx-auto sm:px-4 lg:px-6 overflow-hidden shadow-sm sm:rounded-lg bg-sky-300 pb-6'>
-          <h2 className='py-4 text-black font-bold'>Registre su mascota</h2>
+        <div className='pb-6 mx-auto overflow-hidden shadow-sm max-w-7xl sm:px-4 lg:px-6 sm:rounded-lg bg-sky-300'>
+          <h2 className='py-4 font-bold text-black'>Registre su mascota</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && <div style={{ color: 'red' }}>{error}</div>}
             {success && <div style={{ color: 'green' }}>{success}</div>}
@@ -108,9 +108,9 @@ function CrearMascota() {
               </div>
 
               <div className='w-full'>
-                <label className='block mb-2 text-sm font-medium text-gray-900'>Género <strong>*</strong></label>
+                <label className='block mb-2 text-sm font-medium text-gray-900'>Sexo <strong>*</strong></label>
                 <select className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5' name="gender" value={formData.gender} onChange={handleChange} required>
-                  <option value="">Selecciona un género</option>
+                  <option value="">Selecciona el sexo</option>
                   <option value="Hembra">Hembra</option>
                   <option value="Macho">Macho</option>
                 </select>
@@ -133,8 +133,8 @@ function CrearMascota() {
             </div>
 
             <button type="submit" className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-primary-200">Registrar Mascota</button>
-            <Link to="/dashboard" className="ml-6 inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-primary-200">Ya tengo una mascota registrada</Link>
-          </form>
+            <Link to="/dashboard" className="flex-1 px-6 py-2 mx-2 text-white transition duration-150 ease-in-out bg-green-800 rounded-md hover:bg-green-700">Volver</Link>
+            </form>
         </div>
       </section>
     </div>

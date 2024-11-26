@@ -33,16 +33,16 @@ const PrivacyPolicyModal = ({ isOpen, onClose }) => {
       }}>
         <div className='pb-2'>
           <h2 className='pb-2 text-lg font-bold text-center'>Política de Privacidad</h2>
-            <p className='text-md font-medium text-justify'>En la Clínica Veterinaria “Ciudad Guzmán”, valoramos la privacidad de nuestros clientes y sus mascotas. Esta política de privacidad explica cómo recopilamos y utilizamos la información personal para gestionar citas eficientemente.</p>
+            <p className='font-medium text-justify text-md'>En la Clínica Veterinaria “Ciudad Guzmán”, valoramos la privacidad de nuestros clientes y sus mascotas. Esta política de privacidad explica cómo recopilamos y utilizamos la información personal para gestionar citas eficientemente.</p>
         </div>
         <div className='p-2 text-wrap'>
-          <h3 className='text-md font-semibold'>Información Recopilada</h3>
+          <h3 className='font-semibold text-md'>Información Recopilada</h3>
             <p className='pb-2'>Recopilamos datos personales necesarios para agendar citas, incluyendo nombre, contacto y detalles de las mascotas.</p>
 
-          <h3 className='text-md font-semibold'>Uso de la Información</h3>
+          <h3 className='font-semibold text-md'>Uso de la Información</h3>
             <p className='pb-2'>Utilizamos la información recopilada para programar citas, enviar recordatorios y mejorar nuestros servicios.</p>
 
-          <h3 className='text-md font-semibold'>Seguridad</h3>
+          <h3 className='font-semibold text-md'>Seguridad</h3>
             <p>Nos comprometemos a proteger la seguridad de su información personal mediante medidas tecnológicas avanzadas.</p>
           </div>
 
@@ -88,7 +88,7 @@ const Register = () => {
     // Intentar registrar al usuario
     const { error } = await signUp(formData);
     if (!error) {
-      navigate("/message");
+      navigate("/login");
     } else {
       console.error("Error de registro:", error.message);
       toast.error("Error al intentar crear un usuario: " + error.message);
@@ -98,30 +98,30 @@ const Register = () => {
   return (
   <>
    <Toaster position="top-right" richColors/>
-    <div className="min-h-screen flex items-center justify-center bg-gray-50"> {/* Contenedor exterior para centrar vertical y horizontalmente */}
-      <div className='bg-white px-10 py-20 rounded-3xl border-2 border-gray-100 shadow-lg max-w-md w-full'> {/* Ajusta el tamaño máximo y ancho completo dentro del flex */}
+    <div className="flex items-center justify-center min-h-screen bg-gray-50"> {/* Contenedor exterior para centrar vertical y horizontalmente */}
+      <div className='w-full max-w-md px-10 py-20 bg-white border-2 border-gray-100 shadow-lg rounded-3xl'> {/* Ajusta el tamaño máximo y ancho completo dentro del flex */}
         <h1 className='text-5xl font-semibold text-center'>Crear una cuenta</h1>
-        <p className='font-medium text-lg text-gray-400 mt-3 text-center'>¡Regístrate para acceder a todos nuestros servicios!</p>
+        <p className='mt-3 text-lg font-medium text-center text-gray-400'>¡Regístrate para acceder a todos nuestros servicios!</p>
         <form onSubmit={handleSubmit} className='mt-8'>
           
           <div>
             <label className='text-lg font-medium'>Correo electrónico</label>
-            <input className='w-full border-2 border-gray-100 rounded-px p-4 mt-1 bg-transparent' placeholder="Ingrese su correo electrónico" name='email' onChange={handleChange} />
+            <input className='w-full p-4 mt-1 bg-transparent border-2 border-gray-100 rounded-px' placeholder="Ingrese su correo electrónico" name='email' onChange={handleChange} />
           </div>
   
           <div>
             <label className='text-lg font-medium'>Contraseña</label>
-            <input className='w-full border-2 border-gray-100 rounded-px p-4 mt-1 bg-transparent' placeholder="Ingrese su contraseña" type="password" name='password' onChange={handleChange} />
+            <input className='w-full p-4 mt-1 bg-transparent border-2 border-gray-100 rounded-px' placeholder="Ingrese su contraseña" type="password" name='password' onChange={handleChange} />
           </div>
           
-          <div className='mt-8 flex items-center mb-4'>
+          <div className='flex items-center mt-8 mb-4'>
               <input type="checkbox" id='remember' checked={isAgreed} onChange={handleCheckboxChange} />
-              <label className='ml-2 font-medium text-base'>He leído y estoy de acuerdo con la <span className='text-[#0d6efd] cursor-pointer' onClick={() => setModalOpen(true)}>política de privacidad</span></label>
+              <label className='ml-2 text-base font-medium'>He leído y estoy de acuerdo con la <span className='text-[#0d6efd] cursor-pointer' onClick={() => setModalOpen(true)}>política de privacidad</span></label>
             </div>
             <button type="submit" className='py-2 border-2 border-gray-100 rounded-xl bg-[#0d6efd] text-white text-md active:scale-[.98] active:duration-75 hover:scale-[1.01] ease-in-out transition-all px-8 w-full'>Crear cuenta</button>
           </form>
-        <div className="mt-6 flex justify-center items-center">
-          <p className="font-medium text-base">¿Ya tienes una cuenta?</p>
+        <div className="flex items-center justify-center mt-6">
+          <p className="text-base font-medium">¿Ya tienes una cuenta?</p>
           <Link to='/login' className="text-[#0d6efd] text-base font-medium ml-2">Iniciar sesión</Link>
         </div>
       </div>

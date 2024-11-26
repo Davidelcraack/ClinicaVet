@@ -16,7 +16,6 @@ const Home = () => {
     <div>
       <Navbar />
       <Hero />
-      {/* Aquí puedes añadir el resto*/}
     </div>
   );
 };

@@ -22,12 +22,12 @@ const NavbarUser = () => {
   }
 
   return (
-    <div className='relative'>
+    <div className='fixed top-0 left-0 z-50 w-full'>
       <div className='z-100 flex justify-between items-center h-24 max-w-[100%] mx-auto px-4 text-white bg-[#0d6efd]'>
         {/* Logo */}
         <div className="flex items-center">
         <Link to= "/">
-          <img src="images\logo.png" alt="Logo" className="h-10 w-auto mr-2" />
+          <img src="images\logo.png" alt="Logo" className="w-auto h-10 mr-2" />
         </Link>
           <h1 className='text-3xl font-bold text-[#fff]'> Menú del Usuario</h1>
         </div>
@@ -35,8 +35,8 @@ const NavbarUser = () => {
         <ul className="hidden md:flex">
           <li className="p-4"><Link to="/dashboard">Dashboard</Link></li>
           <li className="p-4"><Link to="/crear-cita">Crear cita</Link></li>
-          <li className="p-4"><Link to="/crear-mascota">Mis mascotas</Link></li>
-          <li className="flex items-center justify-center pt-4 pb-4 border-b-2 border-b-white no-underline"><button onClick={handleLogout}>Cerrar sesion</button></li>
+          <li className="p-4"><Link to="/crear-mascota">Agregar mascota</Link></li>
+          <li className="flex items-center justify-center pt-4 pb-4 no-underline border-b-2 border-b-white"><button onClick={handleLogout}>Cerrar sesion</button></li>
         </ul>
         
         {/* Boton de menu para pantallas pequeñas */}
@@ -50,13 +50,13 @@ const NavbarUser = () => {
         {/* Logo */}
         <div className="flex items-center justify-center my-4">
         <Link to="/">
-          <img src="images\logo.png" alt="Logo" className="h-16 w-auto" />
+          <img src="images\logo.png" alt="Logo" className="w-auto h-16" />
         </Link>
         </div>
         <li className="p-4 border-b-2 border-b-white"><Link to="/dashboard">Dashboard</Link></li>
         <li className="p-4 border-b-2 border-b-white"><Link to="/crear-cita">Crear cita</Link></li>
-        <li className="p-4 border-b-2 border-b-white"><Link to="/crear-mascota">Añadir mascotas</Link></li>
-       <li className="flex items-center justify-center pt-4 pb-4 border-b-2 border-b-white no-underline"><button onClick={handleLogout}>Cerrar sesion</button></li>  
+        <li className="p-4 border-b-2 border-b-white"><Link to="/crear-mascota">Agregar mascota</Link></li>
+       <li className="flex items-center justify-center pt-4 pb-4 no-underline border-b-2 border-b-white"><button onClick={handleLogout}>Cerrar sesion</button></li>  
       </ul>
     </div>
   )

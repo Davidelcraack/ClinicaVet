@@ -24,9 +24,12 @@
     "react-datepicker": "^6.9.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
+    "react-native-dotenv": "^3.4.11",
     "react-router-dom": "^6.22.3",
     "react-typed": "^2.0.12",
-    "sonner": "^1.4.41"
+    "sonner": "^1.4.41",
+    "xlsx": "^0.18.5",
+    "zustand": "^5.0.0-rc.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.56",

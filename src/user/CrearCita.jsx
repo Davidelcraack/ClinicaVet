@@ -131,7 +131,7 @@ function CrearCita() {
       .from('available_slots')
       .update({ is_available: false })
       .match({ id: formData.selectedSlot });
-
+ 
     if (slotUpdateError) {
       setError('Error al actualizar el slot: ' + slotUpdateError.message);
     } else {
@@ -154,11 +154,11 @@ function CrearCita() {
         <h2 className='text-2xl font-bold text-center text-[#004f6f]'>Por favor rellena el siguiente formulario para la creación de su cita</h2>
       </div>
       <section className='py-4'>
-        <div className='max-w-4xl mx-auto sm:px-4 lg:px-6 overflow-hidden shadow-lg sm:rounded-lg bg-sky-300 pb-6'>
-          <h2 className='pt-4 pb-2 text-xl font-bold text-black text-center'>Crear Cita</h2>
-          <form onSubmit={handleSubmit} className="space-y-6 p-6">
-            {error && <div className='text-red-500 text-center'>{error}</div>}
-            {success && <div className='text-green-500 text-center'>{success}</div>}
+        <div className='max-w-4xl pb-6 mx-auto overflow-hidden shadow-lg sm:px-4 lg:px-6 sm:rounded-lg bg-sky-300'>
+          <h2 className='pt-4 pb-2 text-xl font-bold text-center text-black'>Crear Cita</h2>
+          <form onSubmit={handleSubmit} className="p-6 space-y-6">
+            {error && <div className='text-center text-red-500'>{error}</div>}
+            {success && <div className='text-center text-green-500'>{success}</div>}
 
             <div>
               <label className='block mb-2 text-sm font-medium text-gray-900'>Selecciona tu mascota:</label>
@@ -219,9 +219,9 @@ function CrearCita() {
               </select>
             </div>
 
-            <div className='flex justify-between items-center pt-4'>
-              <button type="submit" className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md flex-1 transition duration-150 ease-in-out">Crear Cita</button>
-              <Link to="/crear-mascota" className="mx-2 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md flex-1 transition duration-150 ease-in-out">Añadir mascota</Link>
+            <div className='flex items-center justify-between pt-4'>
+              <button type="submit" className="flex-1 px-6 py-2 text-white transition duration-150 ease-in-out bg-blue-600 rounded-md hover:bg-blue-700">Crear Cita</button>
+              <Link to="/dashboard" className="flex-1 px-6 py-2 mx-2 text-white transition duration-150 ease-in-out bg-green-800 rounded-md hover:bg-green-700">Volver</Link>
             </div>
           </form>
         </div>

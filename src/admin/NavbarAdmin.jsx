@@ -22,12 +22,12 @@ const NavbarAdmin = () => {
   }
 
   return (
-    <div className='relative'>
+    <div className='className= fixed top-0 left-0 z-50 w-full'>
       <div className='z-100 flex justify-between items-center h-24 max-w-[100%] mx-auto px-4 text-white bg-[#0d6efd]'>
         {/* Logo */}
         <div className="flex items-center">
           <Link to="/">
-          <img src="images\logo.png" alt="Logo" className="h-10 w-auto mr-2" />
+          <img src="images\logo.png" alt="Logo" className="w-auto h-10 mr-2" />
           </Link>
           <h1 className='text-3xl font-bold text-[#fff]'> Administración de la clínica</h1>
         </div>
@@ -37,7 +37,7 @@ const NavbarAdmin = () => {
           <li className="p-4"><Link to="/administrar-mascota">Administrar mascotas</Link></li>
           <li className="p-4"><Link to="/detalles-cita">Administrar horarios</Link></li>
           <li className="p-4"><Link to="/administrar-servicios">Administrar servicios</Link></li>
-          <li className="flex items-center justify-center pt-4 pb-4 border-b-2 border-b-white no-underline"><button onClick={handleLogout}>Cerrar sesion</button></li>
+          <li className="flex items-center justify-center pt-4 pb-4 no-underline border-b-2 border-b-white"><button onClick={handleLogout}>Cerrar sesion</button></li>
         </ul>
         
         {/* Boton de menu para pantallas pequeñas */}
@@ -51,14 +51,14 @@ const NavbarAdmin = () => {
         {/* Logo */}
         <div className="flex items-center justify-center my-4">
           <Link to="/">
-          <img src="images\logo.png" alt="Logo" className="h-16 w-auto" />
+          <img src="images\logo.png" alt="Logo" className="w-auto h-16" />
           </Link>
         </div>
         <li className="p-4 border-b-2 border-b-white"><Link to="/administrar-cita">Administrar citas</Link></li>
         <li className="p-4 border-b-2 border-b-white"><Link to="/administrar-mascota">Administrar mascotas</Link></li>
         <li className="p-4 border-b-2 border-b-white"><Link to="/detalles-cita">Administrar horarios</Link></li>
         <li className="p-4 border-b-2 border-b-white"><Link to="/administrar-servicios">Administrar servicios</Link></li>
-       <li className="flex items-center justify-center pt-4 pb-4 border-b-2 border-b-white no-underline"><button onClick={handleLogout}>Cerrar sesion</button></li>  
+       <li className="flex items-center justify-center pt-4 pb-4 no-underline border-b-2 border-b-white"><button onClick={handleLogout}>Cerrar sesion</button></li>  
       </ul>
     </div>
   )

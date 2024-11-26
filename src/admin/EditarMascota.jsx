@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { supabase } from '../helpers/supabase';
 import { UserAuthContext } from '../context/UserAuthContext';
 import { Toaster, toast } from 'sonner';
+import { Link } from 'react-router-dom';
 
 
 function EditarMascota() {
@@ -95,8 +96,8 @@ function EditarMascota() {
           <img src='/images/banner.jpg' className='w-full h-auto'></img>
           <h2 className='text-2xl font-bold text-center text-[#004f6f]'>Por favor rellena el siguiente formulario para la actualizacion de la información de la mascota</h2>
         </div>
-        <div className='max-w-7xl mx-auto sm:px-4 lg:px-6 overflow-hidden shadow-sm sm:rounded-lg bg-sky-300 pb-6'>
-                <h3 className='py-4 text-black font-bold'>Mascotas registradas</h3>
+        <div className='pb-6 mx-auto overflow-hidden shadow-sm max-w-7xl sm:px-4 lg:px-6 sm:rounded-lg bg-sky-300'>
+                <h3 className='py-4 font-bold text-black'>Mascotas registradas</h3>
                 <div className='relative overflow-x-auto shadow-md sm:rounded-lg bg-sky-200'>
         <form onSubmit={handleSubmit} className="space-y-4">
             <label className='block mb-2 text-sm font-medium text-gray-900'>
@@ -143,7 +144,8 @@ function EditarMascota() {
                 Notas medicas:
                 <textarea className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5' name="doctor_notes" value={pet.doctor_notes} onChange={handleChange} />
             </label>
-            <button className="ml-4 mt-4 px-6 py-2 text-white bg-blue-600 rounded-md" type="submit">Guardar Cambios</button>
+            <button className="px-6 py-2 mt-4 ml-4 text-white bg-blue-600 rounded-md" type="submit">Guardar Cambios</button>
+            <Link to="/administrar-mascota" className="flex-1 px-6 py-2 mx-2 text-white transition duration-150 ease-in-out bg-green-800 rounded-md hover:bg-green-700">Volver</Link>
         </form>
       </div>
       </div>
